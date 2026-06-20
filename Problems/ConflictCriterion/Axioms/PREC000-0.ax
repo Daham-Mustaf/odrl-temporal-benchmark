@@ -1,0 +1,60 @@
+%--------------------------------------------------------------------------
+% File     : PREC000-0.ax
+% Domain   : ODRL Policy / Temporal Decomposition
+% Axioms   : Endpoint precedence, disjointness criterion, operator-tag mapping
+% Version  : 1.0
+% English  : Endpoint precedence with open/closed tags (prec/4), the disjointness criterion
+%           : (disjoint/8), and the operator-to-tag mapping for the temporal operators.
+%           : Mirrors AXIS-side PREC000-0.ax; handles mixed open/closed intervals.
+%
+% Refs     : [Anonymous26d] Anonymous. Sort-Stratified Semantics for ODRL: Resolving Temporal-Sort Ambiguity in Policy Constraints. LPAR-26 (anonymized for review).
+% Source   : anonymous
+% Authors  : anonymous
+% Names    : PREC000-0.ax
+%
+% Status   : Satisfiable
+% SPC      : FOF_SAT_RFN
+%
+% Comments : General conflict criterion for mixed open/closed intervals.
+%           : Included by ConflictCriterion problems on top of DENOT000-0.ax.
+%           : 16 axioms: 3 tag-sort + 4 prec + 1 disjoint + 6 operator-tag + 2 functionality.
+%--------------------------------------------------------------------------
+% ==========================================================================
+% Section 1: Tag sort {c, o}  (closed / open endpoint)
+% ==========================================================================
+fof(tag_c,         axiom, tag(c)).
+fof(tag_o,         axiom, tag(o)).
+fof(tags_distinct, axiom, c != o).
+% ==========================================================================
+% Section 2: Endpoint precedence (u prec l)
+%   (c,c) both closed -> u prec l iff u < l   (strict; closed endpoints touch)
+%   (o,c)/(c,o)/(o,o) some open -> u prec l iff u <= l
+% ==========================================================================
+fof(prec_cc, axiom, ![U,L]: (prec(U,L,c,c) <=> less(U,L))).
+fof(prec_oc, axiom, ![U,L]: (prec(U,L,o,c) <=> leq(U,L))).
+fof(prec_co, axiom, ![U,L]: (prec(U,L,c,o) <=> leq(U,L))).
+fof(prec_oo, axiom, ![U,L]: (prec(U,L,o,o) <=> leq(U,L))).
+% ==========================================================================
+% Section 3: Disjointness criterion
+%   disjoint iff the upper endpoint of one precedes the lower of the other.
+% ==========================================================================
+fof(disjoint_def, axiom,
+    ![L1,U1,CL1,CU1,L2,U2,CL2,CU2]:
+      (disjoint(L1,U1,CL1,CU1,L2,U2,CL2,CU2)
+       <=> (prec(U1,L2,CU1,CL2) | prec(U2,L1,CU2,CL1)))).
+% ==========================================================================
+% Section 4: Operator-to-tag mapping (temporal operators)
+%   eq -> upper c & lower c   lteq -> upper c   gteq -> lower c
+%   lt -> upper o             gt   -> lower o
+% ==========================================================================
+fof(upper_tag_eq,   axiom, upper_tag(eq,   c)).
+fof(upper_tag_lteq, axiom, upper_tag(lteq, c)).
+fof(upper_tag_lt,   axiom, upper_tag(lt,   o)).
+fof(lower_tag_eq,   axiom, lower_tag(eq,   c)).
+fof(lower_tag_gteq, axiom, lower_tag(gteq, c)).
+fof(lower_tag_gt,   axiom, lower_tag(gt,   o)).
+fof(upper_tag_functional, axiom,
+    ![OP,T1,T2]: ((upper_tag(OP,T1) & upper_tag(OP,T2)) => T1 = T2)).
+fof(lower_tag_functional, axiom,
+    ![OP,T1,T2]: ((lower_tag(OP,T1) & lower_tag(OP,T2)) => T1 = T2)).
+%--------------------------------------------------------------------------

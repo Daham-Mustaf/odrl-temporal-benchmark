@@ -1,0 +1,24 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+# provider: each phase at least the stated delay after the previous
+drk:policyA a odrl:Set ;
+  odrl:permission [
+    odrl:action odrl:use ;
+    odrl:constraint [
+      odrl:andSequence (
+      [ odrl:leftOperand odrl:delayPeriod ; odrl:operator odrl:gteq ; odrl:rightOperand "P5D"^^xsd:duration ]
+      [ odrl:leftOperand odrl:delayPeriod ; odrl:operator odrl:gteq ; odrl:rightOperand "P5D"^^xsd:duration ]
+      )
+    ]
+  ] .
+# consumer: the whole sequence must complete within the deadline
+drk:policyB a odrl:Set ;
+  odrl:permission [
+    odrl:action odrl:use ;
+    odrl:constraint [
+      odrl:leftOperand odrl:elapsedTime ;
+      odrl:operator odrl:lteq ;
+      odrl:rightOperand "P12D"^^xsd:duration
+    ]
+  ] .

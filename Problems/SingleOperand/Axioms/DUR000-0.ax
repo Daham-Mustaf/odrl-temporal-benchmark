@@ -1,0 +1,30 @@
+%--------------------------------------------------------------------------
+% File     : DUR000-0.ax
+% Domain   : ODRL Policy / Temporal Decomposition
+% Axioms   : Duration domain: sort, zero, and non-negativity
+% Version  : 1.0
+% English  : The duration sort dur, its least element d0 (zero-length duration), and
+%           : 0 <= d for every duration. The monoid (+) lives in the typed arithmetic
+%           : layer used by the Diff and Mod tiers.
+%
+% Refs     : [Anonymous26d] Anonymous. Sort-Stratified Semantics for ODRL: Resolving Temporal-Sort Ambiguity in Policy Constraints. LPAR-26 (anonymized for review).
+% Source   : anonymous
+% Authors  : anonymous
+% Names    : DUR000-0.ax
+%
+% Status   : Satisfiable
+% SPC      : FOF_SAT_RFN
+%
+% Comments : Included only by duration-operand problems; leaves the timeline order
+%           : untouched (no constant forces a least instant).
+%           : 2 axioms: zero_is_duration, duration_non_negativity.
+%--------------------------------------------------------------------------
+% ==========================================================================
+% Duration sort and zero (2 axioms)
+% ==========================================================================
+% d0 is a duration: the zero-length duration
+fof(zero_is_duration, axiom, dur(d0)).
+% Non-negativity: every duration is at least the zero duration
+fof(duration_non_negativity, axiom,
+    ![X]: (dur(X) => leq(d0,X))).
+%--------------------------------------------------------------------------

@@ -1,0 +1,11 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+# offer constrains an instant (dateTime); request constrains a duration (elapsedTime).
+# Different sorts -> no interaction. A naive single-axis reading manufactures a conflict.
+drk:offer a odrl:Set ;
+  odrl:permission [ odrl:action odrl:use ;
+    odrl:constraint [ odrl:leftOperand odrl:dateTime ; odrl:operator odrl:gteq ; odrl:rightOperand "2026-12-01T00:00:00"^^xsd:dateTime ] ] .
+drk:request a odrl:Set ;
+  odrl:permission [ odrl:action odrl:use ;
+    odrl:constraint [ odrl:leftOperand odrl:elapsedTime ; odrl:operator odrl:lteq ; odrl:rightOperand "P30D"^^xsd:duration ] ] .

@@ -1,0 +1,36 @@
+%--------------------------------------------------------------------------
+% File     : PER000-0.ax
+% Domain   : ODRL Policy / Temporal Decomposition
+% Axioms   : Periodic recurrence (Mod tier, gcd / divisibility)
+% Version  : 1.0
+% English  : recurs(T,A,P): instant T lies on the period-P schedule anchored at A,
+%           : i.e. T = A + P*K for some K >= 0. Two periodic (timeInterval) constraints
+%           : share an access iff their schedules coincide: gcd(P1,P2) | (A2 - A1).
+%
+% Refs     : [Anonymous26d] Anonymous. Sort-Stratified Semantics for ODRL: Resolving Temporal-Sort Ambiguity in Policy Constraints. LPAR-26 (anonymized for review).
+% Source   : anonymous
+% Authors  : anonymous
+% Names    : PER000-0.ax
+%
+% Status   : Satisfiable
+% SPC      : FOF_SAT_RFN
+%
+% Comments : Mod tier: integer arithmetic. Problems instantiate A,P with literals
+%           : (linear / Presburger). The SMT side is QF_LIA; resolution provers with no
+%           : arithmetic cannot decide the no-coincidence (conflict) cases.
+%           : 2 axioms: recurs_type, recurs_def (TFF, $int).
+%--------------------------------------------------------------------------
+% ==========================================================================
+% recurs/3 (Mod tier): periodic membership over the integer timeline.
+%   recurs(T, A, P)  <=>  ?K>=0 . T = A + P*K
+% A period-P schedule anchored at A is the set { A + P*K : K >= 0 }. Two
+% periodic (timeInterval) constraints share an access instant iff their
+% schedules coincide, i.e. gcd(P1,P2) | (A2 - A1). Problems instantiate A and
+% P with integer literals, so every instance is linear (Presburger).
+% ==========================================================================
+tff(recurs_type, type, recurs : ( $int * $int * $int ) > $o ).
+tff(recurs_def, axiom,
+    ! [T: $int, A: $int, P: $int] :
+      ( recurs(T, A, P)
+    <=> ? [K: $int] : ( $greatereq(K, 0) & T = $sum(A, $product(P, K)) ) ) ).
+%--------------------------------------------------------------------------

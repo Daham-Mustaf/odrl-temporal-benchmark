@@ -1,0 +1,38 @@
+%--------------------------------------------------------------------------
+% File     : SEQ000-0.ax
+% Domain   : ODRL Policy / Temporal Decomposition
+% Axioms   : Sequence / Simple Temporal Network (Diff tier)
+% Version  : 1.0
+% English  : Events carry integer time stamps (evt_time). An andSequence edge seq(E,F)
+%           : orders them in time; duration gaps and deadlines are difference constraints
+%           : (QF_IDL). Two policies conflict iff the combined network has a negative
+%           : cycle. Used by the Sequence category.
+%
+% Refs     : [Anonymous26d] Anonymous. Sort-Stratified Semantics for ODRL: Resolving Temporal-Sort Ambiguity in Policy Constraints. LPAR-26 (anonymized for review).
+% Source   : anonymous
+% Authors  : anonymous
+% Names    : SEQ000-0.ax
+%
+% Status   : Satisfiable
+% SPC      : FOF_SAT_RFN
+%
+% Comments : Documentation of the Diff-tier STN. Both the TPTP and SMT problems inline
+%           : the difference constraints over $int, so each instance is self-contained;
+%           : this file is the canonical statement of the sequence/STN semantics.
+%           : 4 axioms: event type + evt_time accessor + seq relation + seq_orders_time (TFF, $int).
+%--------------------------------------------------------------------------
+% ==========================================================================
+% Diff tier: sequences as a Simple Temporal Network (STN).
+% Each event carries an integer time stamp evt_time. An andSequence edge
+% seq(E,F) orders the two events in time (evt_time(E) <= evt_time(F));
+% duration gaps and deadlines become difference constraints
+% evt_time(F) - evt_time(E) <op> d, i.e. QF_IDL. Two policies conflict iff
+% the combined network is inconsistent (a negative cycle). Problems quantify
+% over events; the SMT side inlines the differences over Int time points.
+% ==========================================================================
+tff(event_type, type, event : $tType ).
+tff(evt_time_decl, type, evt_time : event > $int ).
+tff(seq_decl, type, seq : ( event * event ) > $o ).
+tff(seq_orders_time, axiom,
+    ! [E: event, F: event] : ( seq(E, F) => $lesseq(evt_time(E), evt_time(F)) ) ).
+%--------------------------------------------------------------------------

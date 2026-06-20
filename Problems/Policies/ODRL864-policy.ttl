@@ -1,0 +1,28 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+# offer (anchored 2026-06-01)
+drk:policyA a odrl:Set ;
+  odrl:permission [
+    odrl:action odrl:use ;
+    odrl:constraint [
+      odrl:and (
+        [ odrl:leftOperand odrl:dateTime ; odrl:operator odrl:eq ; odrl:rightOperand "2026-06-01T00:00:00"^^xsd:dateTime ]
+        [ odrl:leftOperand odrl:elapsedTime ; odrl:operator odrl:lteq ; odrl:rightOperand "P30D"^^xsd:duration ]
+        [ odrl:leftOperand odrl:delayPeriod ; odrl:operator odrl:gteq ; odrl:rightOperand "P1D"^^xsd:duration ]
+        [ odrl:leftOperand odrl:timeInterval ; odrl:operator odrl:eq ; odrl:rightOperand "P30D"^^xsd:duration ]
+      )
+    ]
+  ] .
+# request (anchored 2026-06-01)
+drk:policyB a odrl:Set ;
+  odrl:permission [
+    odrl:action odrl:use ;
+    odrl:constraint [
+      odrl:and (
+        [ odrl:leftOperand odrl:dateTime ; odrl:operator odrl:eq ; odrl:rightOperand "2026-06-01T00:00:00"^^xsd:dateTime ]
+        [ odrl:leftOperand odrl:elapsedTime ; odrl:operator odrl:lteq ; odrl:rightOperand "P10D"^^xsd:duration ]
+        [ odrl:leftOperand odrl:timeInterval ; odrl:operator odrl:eq ; odrl:rightOperand "P30D"^^xsd:duration ]
+      )
+    ]
+  ] .

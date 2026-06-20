@@ -1,0 +1,55 @@
+%--------------------------------------------------------------------------
+% File     : ORD000-0.ax
+% Domain   : ODRL Policy / Temporal Decomposition
+% Axioms   : Strict total order for temporal interval reasoning
+% Version  : 1.0
+% English  : Foundation order for the temporal fragment. Defines a strict total
+%           : order (less/2) and the derived non-strict order (leq/2). A problem is
+%           : single-sorted: all instants, or all durations.
+%
+% Refs     : [Anonymous26d] Anonymous. Sort-Stratified Semantics for ODRL: Resolving Temporal-Sort Ambiguity in Policy Constraints. LPAR-26 (anonymized for review).
+% Source   : anonymous
+% Authors  : anonymous
+% Names    : ORD000-0.ax
+%
+% Status   : Satisfiable
+% SPC      : FOF_SAT_RFN
+%
+% Comments : Included explicitly by every problem file as the first include.
+%           : No axiom file self-includes this file (flat include architecture).
+%           : 9 axioms: irreflexive, transitive, trichotomy, leq_def, leq_antisym, less_implies_leq, leq_less_trans, less_leq_trans, leq_trans.
+%--------------------------------------------------------------------------
+% ==========================================================================
+% Core: Strict total order (3 axioms)
+% ==========================================================================
+% Irreflexivity: nothing is less than itself
+fof(irreflexive, axiom, ![X]: ~less(X,X)).
+% Transitivity: less-than chains
+fof(transitive, axiom, ![X,Y,Z]:
+    ((less(X,Y) & less(Y,Z)) => less(X,Z))).
+% Trichotomy: for any two elements, exactly one of <, =, > holds
+fof(trichotomy, axiom, ![X,Y]:
+    (less(X,Y) | X = Y | less(Y,X))).
+% ==========================================================================
+% Derived: Non-strict order (1 axiom)
+% ==========================================================================
+% leq defined as the reflexive closure of less
+fof(leq_def, axiom, ![X,Y]:
+    (leq(X,Y) <=> (less(X,Y) | X = Y))).
+% ==========================================================================
+% Helper lemmas (derivable but aid Vampire/E performance)
+% ==========================================================================
+% Antisymmetry of leq
+fof(leq_antisym, axiom, ![X,Y]:
+    ((leq(X,Y) & leq(Y,X)) => X = Y)).
+% less implies leq
+fof(less_implies_leq, axiom, ![X,Y]:
+    (less(X,Y) => leq(X,Y))).
+% Mixed transitivity
+fof(leq_less_trans, axiom, ![X,Y,Z]:
+    ((leq(X,Y) & less(Y,Z)) => less(X,Z))).
+fof(less_leq_trans, axiom, ![X,Y,Z]:
+    ((less(X,Y) & leq(Y,Z)) => less(X,Z))).
+fof(leq_trans, axiom, ![X,Y,Z]:
+    ((leq(X,Y) & leq(Y,Z)) => leq(X,Z))).
+%--------------------------------------------------------------------------

@@ -1,0 +1,25 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+# offer: dateTime fixed AND elapsedTime capped
+drk:policyA a odrl:Set ;
+  odrl:permission [
+    odrl:action odrl:use ;
+    odrl:constraint [
+      odrl:and (
+        [ odrl:leftOperand odrl:dateTime ; odrl:operator odrl:eq ; odrl:rightOperand "2026-08-01T00:00:00"^^xsd:dateTime ]
+        [ odrl:leftOperand odrl:elapsedTime ; odrl:operator odrl:lteq ; odrl:rightOperand "P10D"^^xsd:duration ]
+      )
+    ]
+  ] .
+# request: dateTime disjoint (Conflict) AND elapsedTime COMPLETED compatibly -- the conflict still stands
+drk:policyB a odrl:Set ;
+  odrl:permission [
+    odrl:action odrl:use ;
+    odrl:constraint [
+      odrl:and (
+        [ odrl:leftOperand odrl:dateTime ; odrl:operator odrl:eq ; odrl:rightOperand "2027-01-01T00:00:00"^^xsd:dateTime ]
+        [ odrl:leftOperand odrl:elapsedTime ; odrl:operator odrl:lteq ; odrl:rightOperand "P5D"^^xsd:duration ]
+      )
+    ]
+  ] .

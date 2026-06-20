@@ -1,0 +1,7 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+# Ground execution: trig=0, now=0
+drk:policy a odrl:Set ;
+  odrl:permission [ odrl:action odrl:use ;
+    odrl:constraint [ odrl:leftOperand odrl:delayPeriod ; odrl:operator odrl:gteq ; odrl:rightOperand "P1D"^^xsd:duration ] ] .

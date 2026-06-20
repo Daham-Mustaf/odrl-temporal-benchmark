@@ -1,0 +1,12 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+# Ground execution: start=0, now=8, segments [0,2],[4,7]
+drk:policy a odrl:Set ;
+  odrl:permission [ odrl:action odrl:use ;
+    odrl:constraint [
+      odrl:and (
+      [ odrl:leftOperand odrl:elapsedTime ; odrl:operator odrl:lteq ; odrl:rightOperand "P10D"^^xsd:duration ]
+      [ odrl:leftOperand odrl:meteredTime ; odrl:operator odrl:lteq ; odrl:rightOperand "P5D"^^xsd:duration ]
+      )
+    ] ] .

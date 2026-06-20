@@ -1,0 +1,72 @@
+%--------------------------------------------------------------------------
+% File     : DENOT000-0.ax
+% Domain   : ODRL Policy / Temporal Decomposition
+% Axioms   : Interval denotation and verdict algebra
+% Version  : 1.0
+% English  : Interval denotation (in_open/in_lopen/in_ropen/in_closed) and the three-valued
+%           : verdict algebra (compatible/conflict/unknown) with the policy_verdict Kleene
+%           : combinator and the closed-closed interval criteria. Mirrors AXIS000-0.ax.
+%
+% Refs     : [Anonymous26d] Anonymous. Sort-Stratified Semantics for ODRL: Resolving Temporal-Sort Ambiguity in Policy Constraints. LPAR-26 (anonymized for review).
+% Source   : anonymous
+% Authors  : anonymous
+% Names    : DENOT000-0.ax
+%
+% Status   : Satisfiable
+% SPC      : FOF_SAT_RFN
+%
+% Comments : Denotation + verdict core; included by every problem after ORD000-0.ax.
+%           : Uses verdict-value functions, so problems are not pure EPR.
+%           : 15 axioms: 4 interval membership + 5 verdict-constant + 4 policy_verdict + 2 interval criteria.
+%--------------------------------------------------------------------------
+% ==========================================================================
+% Section A: Interval membership (Def. interval-denotation)
+%   in_open(X,L,U)   <=> L < X < U      in_lopen(X,L,U)  <=> L < X <= U
+%   in_ropen(X,L,U)  <=> L <= X < U     in_closed(X,L,U) <=> L <= X <= U
+% A constraint denotes an interval; the operator fixes the form and bounds
+% (eq v -> in_closed(X,v,v); lteq v -> in_lopen(X,floor,v); gteq v -> leq(v,X)).
+% ==========================================================================
+fof(in_open_def,   axiom, ![X,L,U]: (in_open(X,L,U)   <=> (less(L,X) & less(X,U)))).
+fof(in_lopen_def,  axiom, ![X,L,U]: (in_lopen(X,L,U)  <=> (less(L,X) & leq(X,U)))).
+fof(in_ropen_def,  axiom, ![X,L,U]: (in_ropen(X,L,U)  <=> (leq(L,X) & less(X,U)))).
+fof(in_closed_def, axiom, ![X,L,U]: (in_closed(X,L,U) <=> (leq(L,X) & leq(X,U)))).
+% ==========================================================================
+% Section B: Three-valued verdict constants (Conflict < Unknown < Compatible)
+% ==========================================================================
+fof(verdicts_distinct, axiom, $distinct(compatible, conflict, unknown)).
+fof(verdict_total, axiom,
+    ![V]: (is_verdict(V) <=> (V = compatible | V = conflict | V = unknown))).
+fof(is_verdict_compatible, axiom, is_verdict(compatible)).
+fof(is_verdict_conflict,   axiom, is_verdict(conflict)).
+fof(is_verdict_unknown,    axiom, is_verdict(unknown)).
+% ==========================================================================
+% Section C: policy_verdict -- Kleene min over per-operand verdicts
+%   conflict if any operand conflicts; compatible iff all compatible;
+%   unknown otherwise. Temporal analogue of the spatial box_verdict.
+% ==========================================================================
+fof(policy_conflict, axiom,
+    ![V1,V2]: ((is_verdict(V1) & is_verdict(V2) & (V1 = conflict | V2 = conflict))
+               => policy_verdict(V1,V2) = conflict)).
+fof(policy_compatible, axiom,
+    ![V1,V2]: ((is_verdict(V1) & is_verdict(V2) & V1 = compatible & V2 = compatible)
+               => policy_verdict(V1,V2) = compatible)).
+fof(policy_unknown, axiom,
+    ![V1,V2]: ((is_verdict(V1) & is_verdict(V2) & (V1 = unknown | V2 = unknown)
+                & V1 != conflict & V2 != conflict)
+               => policy_verdict(V1,V2) = unknown)).
+fof(policy_verdict_total, axiom,
+    ![V1,V2]: ((is_verdict(V1) & is_verdict(V2))
+               => (policy_verdict(V1,V2) = compatible
+                 | policy_verdict(V1,V2) = conflict
+                 | policy_verdict(V1,V2) = unknown))).
+% ==========================================================================
+% Section D: per-operand containment and disjointness (closed-closed)
+%   interval_subsumes: [L1,U1] subseteq [L2,U2]
+%   interval_conflict: [L1,U1] cap [L2,U2] = empty (strict, closed-closed)
+%   Mixed open/closed endpoints use prec/4 from PREC000-0.ax instead.
+% ==========================================================================
+fof(interval_subsumes_def, axiom,
+    ![L1,U1,L2,U2]: (interval_subsumes(L1,U1,L2,U2) <=> (leq(L2,L1) & leq(U1,U2)))).
+fof(interval_conflict_def, axiom,
+    ![L1,U1,L2,U2]: (interval_conflict(L1,U1,L2,U2) <=> (less(U1,L2) | less(U2,L1)))).
+%--------------------------------------------------------------------------

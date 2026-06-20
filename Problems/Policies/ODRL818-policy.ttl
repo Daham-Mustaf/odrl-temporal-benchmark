@@ -1,0 +1,21 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+drk:policyA a odrl:Set ;
+  odrl:permission [
+    odrl:action odrl:use ;
+    odrl:constraint [
+      odrl:leftOperand odrl:timeInterval ;
+      odrl:operator odrl:eq ;
+      odrl:rightOperand "P30D"^^xsd:duration ;
+      drk:anchor "2026-01-01"^^xsd:date ]
+  ] .
+drk:policyB a odrl:Set ;
+  odrl:permission [
+    odrl:action odrl:use ;
+    odrl:constraint [
+      odrl:leftOperand odrl:timeInterval ;
+      odrl:operator odrl:eq ;
+      odrl:rightOperand "P30D"^^xsd:duration ;
+      drk:anchor "2026-01-16"^^xsd:date ]
+  ] .

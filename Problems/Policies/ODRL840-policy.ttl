@@ -1,0 +1,10 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+# Ground execution: segments [0,4],[5,10] so metered=9; C1 cap P10D, C2 cap P8D
+drk:policyC1 a odrl:Set ;
+  odrl:permission [ odrl:action odrl:use ;
+    odrl:constraint [ odrl:leftOperand odrl:meteredTime ; odrl:operator odrl:lteq ; odrl:rightOperand "P10D"^^xsd:duration ] ] .
+drk:policyC2 a odrl:Set ;
+  odrl:permission [ odrl:action odrl:use ;
+    odrl:constraint [ odrl:leftOperand odrl:meteredTime ; odrl:operator odrl:lteq ; odrl:rightOperand "P8D"^^xsd:duration ] ] .

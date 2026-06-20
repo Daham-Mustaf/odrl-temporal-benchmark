@@ -1,0 +1,25 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+# offer constrains elapsedTime AND delayPeriod (lower bound P5D)
+drk:policyA a odrl:Set ;
+  odrl:permission [
+    odrl:action odrl:use ;
+    odrl:constraint [
+      odrl:and (
+        [ odrl:leftOperand odrl:elapsedTime ; odrl:operator odrl:lteq ; odrl:rightOperand "P10D"^^xsd:duration ]
+        [ odrl:leftOperand odrl:delayPeriod ; odrl:operator odrl:gteq ; odrl:rightOperand "P5D"^^xsd:duration ]
+      )
+    ]
+  ] .
+# request COMPLETES delayPeriod with eq P1D, which is below the offer's P5D floor -> disjoint
+drk:policyB a odrl:Set ;
+  odrl:permission [
+    odrl:action odrl:use ;
+    odrl:constraint [
+      odrl:and (
+        [ odrl:leftOperand odrl:elapsedTime ; odrl:operator odrl:lteq ; odrl:rightOperand "P5D"^^xsd:duration ]
+        [ odrl:leftOperand odrl:delayPeriod ; odrl:operator odrl:eq ; odrl:rightOperand "P1D"^^xsd:duration ]
+      )
+    ]
+  ] .

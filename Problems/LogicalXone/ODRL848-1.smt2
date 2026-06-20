@@ -1,0 +1,19 @@
+; --------------------------------------------------------------------------
+; File     : ODRL848-1.smt2
+; Domain   : ODRL Policy / Temporal Decomposition
+; Axioms   : xone(dateTime gteq 2026-06-01, gteq 2026-08-01) vs eq 2026-04-01 -> Conflict
+; Version  : 1.0
+; Authors  : anonymous
+; Refs     : [Anonymous26d] Anonymous. Sort-Stratified Semantics for ODRL: Resolving Temporal-Sort Ambiguity in Policy Constraints. LPAR-26 (anonymized for review).
+; Source   : anonymous
+; Names    : ODRL848-1.smt2
+; Status   : unsat
+; Comments : Verdict: Conflict  Category: LogicalXone  Difficulty: Easy
+; --------------------------------------------------------------------------
+
+(set-logic QF_LIA)
+(declare-const x Int)
+(assert (= x 90))
+(assert (or (and (>= x 151) (not (>= x 212))) (and (not (>= x 151)) (>= x 212))))
+(check-sat)
+(exit)

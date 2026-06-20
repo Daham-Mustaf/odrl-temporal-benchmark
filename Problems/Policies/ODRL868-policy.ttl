@@ -1,0 +1,17 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix drk:  <http://w3id.org/drk/ontology/> .
+# single policy: a two-step andSequence with a global elapsedTime cap
+drk:policy a odrl:Set ;
+  odrl:permission [
+    odrl:action odrl:use ;
+    odrl:constraint [
+      odrl:and (
+        [ odrl:andSequence (
+            [ odrl:leftOperand odrl:delayPeriod ; odrl:operator odrl:gteq ; odrl:rightOperand "P5D"^^xsd:duration ]
+            [ odrl:leftOperand odrl:delayPeriod ; odrl:operator odrl:gteq ; odrl:rightOperand "P5D"^^xsd:duration ]
+          ) ]
+        [ odrl:leftOperand odrl:elapsedTime ; odrl:operator odrl:lteq ; odrl:rightOperand "P12D"^^xsd:duration ]
+      )
+    ]
+  ] .

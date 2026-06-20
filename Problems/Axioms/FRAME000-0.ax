@@ -1,0 +1,43 @@
+%--------------------------------------------------------------------------
+% File     : FRAME000-0.ax
+% Domain   : ODRL Policy / Temporal Decomposition
+% Axioms   : Cross-operand background theory (Phi)
+% Version  : 1.0
+% English  : An access carries integer temporal quantities (acc_dt instant, acc_el
+%           : elapsedTime, acc_me meteredTime, acc_dl delayPeriod). Phi: durations are
+%           : non-negative and meteredTime <= elapsedTime. Links operands that are
+%           : otherwise independent; used by CrossOperand and the BSB-BnF capstone.
+%
+% Refs     : [Anonymous26d] Anonymous. Sort-Stratified Semantics for ODRL: Resolving Temporal-Sort Ambiguity in Policy Constraints. LPAR-26 (anonymized for review).
+% Source   : anonymous
+% Authors  : anonymous
+% Names    : FRAME000-0.ax
+%
+% Status   : Satisfiable
+% SPC      : FOF_SAT_RFN
+%
+% Comments : Documentation of the cross-operand frame. Both the TPTP and SMT problems
+%           : inline Phi over $int (as PER000 does for the recurrence), so each instance
+%           : is self-contained; this file is the canonical statement of Phi.
+%           : 7 axioms: access type + 4 accessors + phi_nonneg + phi_metered_le_elapsed (TFF, $int).
+%--------------------------------------------------------------------------
+% ==========================================================================
+% Cross-operand background theory Phi (Diff / Mod tiers).
+% An access carries integer-valued temporal quantities:
+%   acc_dt : access instant (day on the timeline)   acc_el : elapsedTime
+%   acc_me : meteredTime                             acc_dl : delayPeriod
+% Phi: every duration is non-negative, and metered time never exceeds
+% elapsed time. Cross-operand and capstone problems quantify over an access
+% and read these accessors; the SMT side inlines Phi over Int constants.
+% ==========================================================================
+tff(access_type, type, access : $tType ).
+tff(acc_dt_decl, type, acc_dt : access > $int ).
+tff(acc_el_decl, type, acc_el : access > $int ).
+tff(acc_me_decl, type, acc_me : access > $int ).
+tff(acc_dl_decl, type, acc_dl : access > $int ).
+tff(phi_nonneg, axiom,
+    ! [A: access] :
+      ( $greatereq(acc_el(A), 0) & $greatereq(acc_me(A), 0) & $greatereq(acc_dl(A), 0) ) ).
+tff(phi_metered_le_elapsed, axiom,
+    ! [A: access] : $lesseq(acc_me(A), acc_el(A)) ).
+%--------------------------------------------------------------------------

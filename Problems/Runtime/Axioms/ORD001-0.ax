@@ -1,0 +1,36 @@
+%--------------------------------------------------------------------------
+% File     : ORD001-0.ax
+% Domain   : ODRL Policy / Temporal Decomposition
+% Axioms   : Density of the strict order
+% Version  : 1.0
+% English  : Density: between any two ordered points lies a third. Included only by
+%           : problems with open (lt/gt) bounds on a continuous domain. Adds an
+%           : existential, so such problems leave EPR.
+%
+% Refs     : [Anonymous26d] Anonymous. Sort-Stratified Semantics for ODRL: Resolving Temporal-Sort Ambiguity in Policy Constraints. LPAR-26 (anonymized for review).
+% Source   : anonymous
+% Authors  : anonymous
+% Names    : ORD001-0.ax
+%
+% Status   : Satisfiable
+% SPC      : FOF_SAT_RFN
+%
+% Comments : Depends on ORD000-0.ax (loaded by the problem file before this file).
+%           : Omit for discrete domains (integer counts).
+%           : 1 axioms: dense.
+%--------------------------------------------------------------------------
+% ==========================================================================
+% Density (1 axiom)
+% ==========================================================================
+% Density: between any two distinct values exists a third.
+% Required for open-interval witnesses over continuous domains (R, Q).
+% DO NOT include for discrete domains (integer counts).
+%
+% Example where density matters:
+%   Policy 1: dateTime gt t1  -> denotation (t1, inf)
+%   Policy 2: dateTime lt t2  -> denotation (-inf, t2)
+%   Intersection (t1, t2) is non-empty only if dense.
+%   Without density the prover cannot find a witness between t1 and t2.
+fof(dense, axiom, ![X,Y]:
+    (less(X,Y) => ?[Z]: (less(X,Z) & less(Z,Y)))).
+%--------------------------------------------------------------------------
