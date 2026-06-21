@@ -1,0 +1,16 @@
+session "ODRL_Temporal" = "HOL-Computational_Algebra" +
+  description ‹
+    Sort-stratified semantics for ODRL temporal constraints.
+    Scaffold: statements complete, proofs partial (see README).
+  ›
+  theories
+    ODRL_Verdict
+    ODRL_Structures
+    ODRL_Intervals
+    ODRL_Periodic
+    ODRL_PolicyVerdict
+    ODRL_Composition
+    ODRL_Background
+    ODRL_Sequence
+    ODRL_Runtime
+    ODRL_Entailment

@@ -1,13 +1,21 @@
 # ODRL Temporal Conflict-Detection Benchmark
 
+![Problems](https://img.shields.io/badge/problems-71-success)
+![Formats](https://img.shields.io/badge/formats-TPTP%20%2B%20SMT--LIB-informational)
+![Vampire](https://img.shields.io/badge/Vampire-5.0.1-1f6feb)
+![E](https://img.shields.io/badge/E%20prover-3.3.2-1f6feb)
+![Z3](https://img.shields.io/badge/Z3-4.8.12-8957e5)
+![cvc5](https://img.shields.io/badge/cvc5-1.3.4-8957e5)
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)
+![License](https://img.shields.io/badge/license-see%20LICENSE-lightgrey)
+
 A benchmark of 71 conflict-detection problems over the temporal operands of ODRL
 (`dateTime`, `delayPeriod`, `elapsedTime`, `meteredTime`, `timeInterval`),
-accompanying the paper *Sort-Stratified Semantics for ODRL* (Mustafa et al., LPAR-26).
-
+accompanying the paper *Sort-Stratified Semantics for ODRL* (Mustafa et al.).
 Each problem is emitted in two formats from a single description: a TPTP `.p` file
 (for the first-order provers Vampire and E) and an SMT-LIB `.smt2` file (for the SMT
 solvers Z3 and cvc5), together with the ODRL policy pair as Turtle (`.ttl`). The two
-encodings are independent and are cross-validated against each other and across the
+encodings are separate and are cross-validated against each other and across the
 four reasoners.
 
 ## Contents
@@ -32,16 +40,19 @@ Problems/      the generated problems, one directory per category (.p, .smt2, .t
                and a self-contained copy of the background Axioms)
 Generators/    problem_data_*.py, writers.py, header.py, temporal_axiom_data.py,
                gen_temporal_axioms.py, gen_problems.py, run_reasoners.sh
+check_benchmark.py   integrity and reproduction checker (counts, pairing,
+               cross-encoding verdict agreement, and an optional four-solver run)
 ```
 
 ## Requirements
 
 - `vampire`, `eprover`, `z3`, and `cvc5` on your `PATH`
-- Python 3 (the generators run under `uv run` or `python3`)
+- Python 3 (the generators and the checker run under `uv run` or `python3`)
 
 ## Running
 
-Run all four reasoners over a category, with a per-problem timeout in seconds:
+Run all four reasoners over a category, with a per-problem timeout in seconds, and run
+the integrity checker over the whole benchmark:
 
 ```bash
 bash Generators/run_reasoners.sh Problems/<Category> 20
@@ -49,13 +60,16 @@ uv run check_benchmark.py Problems --timeout 20
 ```
 
 Vampire and E are run over the `.p` files, Z3 and cvc5 over the `.smt2` files. Each
-reasoner's reported status is checked against the expected status stored in the problem,
-and the script reports `pass` and `fail` counts.
+reasoner's reported status is checked against the expected status stored in the problem.
+`check_benchmark.py` also verifies the structure (71 problems, 15 categories, every
+problem paired across `.p`, `.smt2`, and `.ttl`), checks that the verdict recorded in
+the two encodings agrees, and, when all four solvers are present, reports per-solver
+coverage and flags any answer that disagrees with the declared status.
 
 ## Regenerating
 
 ```bash
-cd ~/odrl-temporal-benchmark
+cd odrl-temporal-benchmark
 uv run Generators/gen_temporal_axioms.py Problems/Axioms
 uv run Generators/gen_problems.py Problems
 ```
@@ -72,12 +86,14 @@ the constraints (or the negation of the equation) and checks satisfiability, so 
 confirmed conflict or equation is `unsat` and a compatibility `sat`. A definite
 disagreement is a wrong verdict; a `Timeout` or `GaveUp` is an undecided result.
 
-The reasoners separate cleanly by tier. The order fragment is FOF and is decided by all
-four reasoners. The arithmetic fragments are TFF over `$int`, where E (which has no
-arithmetic) does not apply: conflicts witnessed by an equality-pinned value or a single
-difference constraint are decided by Vampire and the SMT solvers, and the Presburger
-sub-cases (divisibility, and the summation of inequalities over a temporal network) only
-by Z3 and cvc5.
+The reasoners separate by what each can decide. The order fragment is FOF and is decided
+by all four. The arithmetic fragments are TFF over `$int`, which E does not support, so E
+decides exactly the 48 order problems. Z3 and cvc5 decide all 71. Vampire decides 62: the
+order problems plus the cross-operand, capstone, and runtime conflicts (each a single
+difference or equality-pinned bound) and the two periodic-compatible cases (a shared
+occurrence it can exhibit). The cases only Z3 and cvc5 decide are the periodic conflicts
+(a divisibility argument) and the sequence and network-realizability cases (the
+feasibility of a difference system over a whole trace). No solver returns a wrong verdict.
 
 ## Citation
 
