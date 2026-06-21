@@ -1,42 +1,59 @@
 # ODRL Temporal Sort: Isabelle/HOL formalization scaffold
 
-Mechanization of "Sort-Stratified Semantics for ODRL". This is a **scaffold**:
-every definition and theorem of the paper is stated; proofs are present where
-confident and marked `sorry` with a plan where they are real work. Nothing here
-has been machine-checked; discharge it in a running Isabelle (tested target:
-Isabelle2024 / 2025).
+## TODO
+achine-checked
+development  
 
 ## Build
 
-    isabelle build -D .
+    isabelle build -d . ODRL_Temporal
 
-## Theory map (theory  ->  paper)
+`sorry` / `oops` produce yellow warnings (expected). A red error naming a
+theory and line is a real failure.
 
-| Theory                 | Paper items                                                            | Proof status |
-|------------------------|-----------------------------------------------------------------------|--------------|
-| `ODRL_Verdict`         | def:verdict-algebra                                                    | complete     |
-| `ODRL_Structures`      | def:structures (concrete rat interpretation; shift, diff, elapsed)    | complete     |
-| `ODRL_Intervals`       | def:int-op, def:sort, def:admissible, def:denotation, def:precedence, thm:criterion, lem:normalisation, def:product-denotation, thm:product-expressibility | criterion + ivl_inter = `sorry` (plans inside); rest complete |
-| `ODRL_Periodic`        | def:ti-rec, lem:rec                                                    | existence form provable; gcd form = `sorry` (scale-to-int plan) |
-| `ODRL_PolicyVerdict`   | def:operand-verdict, def:product-verdict, lem:conflict-propagation, prop:monotone, def:completion, thm:unknown-sound | propagation/monotone complete; unknown-sound characterization attempted, completion-existence = `sorry` |
-| `ODRL_Composition`     | def:composition, def:branch, def:or-verdict, thm:composition-soundness | and/or complete; xone = `sorry` |
-| `ODRL_Background`      | def:frame, def:tier, thm:tiered, cor:product-exact                     | Ord case reduces to criterion; Diff/Mod = `sorry` (DBM/Bezout plan) |
-| `ODRL_Sequence`        | def:trace, def:andseq, lem:andseq-strict, prop:collapse                | strict/collapse attempted; some `sorry` |
-| `ODRL_Runtime`         | def:static-conflict, def:runtime-eval, def:runtime-conflict, def:realizability, def:trace-conflict, thm:static-runtime, cor:bridge | bridge = `sorry` (depends on tiered) |
-| `ODRL_Entailment`      | def:refinement, lem:refine-syntax                                     | complete     |
+## Theory map (theory -> paper items)
 
-## The three time sinks (where the weeks go)
+| Theory | Paper items |
+|---|---|
+| ODRL_Verdict | def:verdict-algebra |
+| ODRL_Structures | def:structures (concrete rat interpretation; shift, diff, elapsed) |
+| ODRL_Intervals | def:int-op, def:sort, def:admissible, def:denotation, def:precedence, thm:criterion, lem:normalisation, def:product-denotation, thm:product-expressibility |
+| ODRL_Periodic | def:ti-rec, lem:rec |
+| ODRL_PolicyVerdict | def:operand-verdict, def:product-verdict, lem:conflict-propagation, prop:monotone, def:completion, thm:unknown-sound |
+| ODRL_Composition | def:composition, def:branch, def:or-verdict, thm:composition-soundness |
+| ODRL_Background | def:frame, def:tier, thm:tiered, cor:product-exact |
+| ODRL_Sequence | def:trace, def:andseq, lem:andseq-strict, prop:collapse |
+| ODRL_Runtime | def:static-conflict, def:runtime-eval, def:runtime-conflict, def:realizability, def:trace-conflict, thm:static-runtime, cor:bridge |
+| ODRL_Entailment | def:refinement, lem:refine-syntax |
 
-1. `ODRL_Intervals.criterion` (thm:criterion) and `set_of_ivl_inter` (lem:normalisation):
-   ~3 days. Pure order reasoning over the adjoined-endpoint type `ext`.
-2. `ODRL_Periodic.rec_gcd` (lem:rec) and `ODRL_Background` Diff tier (thm:tiered):
-   the two arithmetic obligations. lem:rec needs clear-denominators + Bezout
-   (`HOL-Computational_Algebra`); the Diff tier is negative-cycle-equals-emptiness
-   for difference systems and is the place to reuse Simon Wimmer's AFP DBM /
-   Timed-Automata material rather than reprove Bellman-Ford.
-3. `ODRL_Runtime` / `ODRL_Sequence`: the trace existential and realizability as
-   STN emptiness, sitting on top of (2).
+## Open obligations (future work)
 
-Soundness of thm:tiered is what to mechanize fully; its **completeness is
-conditional** on Phi being domain-complete, so it is stated with that hypothesis
-explicit, not proved unconditionally.
+These carry `sorry` or are stated schematically; discharging them is future work.
+
+- ODRL_Intervals.set_of_ivl_inter (lem:normalisation) -- bound case split (~1 day)
+- ODRL_Intervals.criterion (thm:criterion) -- order reasoning over `ext` (~2-3 days)
+- ODRL_Intervals.product_empty_iff_factor_empty -- choice-function witness
+- ODRL_Periodic.Per_inter_nonempty_iff -- existence form, algebra
+- ODRL_Periodic.rec_gcd (lem:rec) -- clear-denominators + Bezout
+- ODRL_PolicyVerdict.policy_verdict_eq_Min -- foldr/min = Min
+- ODRL_PolicyVerdict.conflict_dominates -- induction over all_operands
+- ODRL_PolicyVerdict.monotone -- min monotone over fixed list
+- ODRL_PolicyVerdict.unknown_characterisation -- Min over finite enumeration
+- ODRL_PolicyVerdict.unknown_sound_compatible / unknown_sound_conflict -- completions
+- ODRL_Composition.xone_conflict_sound -- d_xone subset d_or, then all-pairs-disjoint
+- ODRL_Background.tiered_Ord -- schematic; needs csys -> per-operand-interval projection
+- ODRL_Background.tiered_Diff (thm:tiered, Diff case) -- negative-cycle = emptiness; reuse Wimmer AFP DBM
+- ODRL_Sequence.andseq_strict, collapse_to_and
+
+## The three time sinks
+
+1. ODRL_Intervals.criterion + set_of_ivl_inter: ~3 days, pure order reasoning over `ext`.
+2. ODRL_Periodic.rec_gcd + ODRL_Background Diff tier: the two arithmetic obligations.
+   lem:rec = clear-denominators + Bezout (HOL-Computational_Algebra); the Diff tier is
+   negative-cycle-equals-emptiness for difference systems -- reuse Simon Wimmer's AFP
+   DBM / Timed-Automata material rather than reproving Bellman-Ford.
+3. ODRL_Runtime / ODRL_Sequence: the trace existential and realizability as STN
+   emptiness, on top of (2).
+
+thm:tiered soundness is what to mechanize fully; its **completeness is conditional**
+on Phi being domain-complete and is stated with that hypothesis explicit (phi_complete).

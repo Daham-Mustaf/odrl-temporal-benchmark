@@ -3,33 +3,33 @@ theory ODRL_Entailment
   imports ODRL_Intervals
 begin
 
-text ‹def:refinement. C1 ⪯ C2 iff its denotation is contained.›
+text \<open>def:refinement. C1 \<preceq> C2 iff its denotation is contained.\<close>
 
-definition refines :: "'a::linorder ivl ⇒ 'a ivl ⇒ bool" (infix ‹⪯› 50) where
-  "I ⪯ J ⟷ set_of I ⊆ set_of J"
+definition refines :: "'a::linorder ivl \<Rightarrow> 'a ivl \<Rightarrow> bool" (infix \<open>\<preceq>\<close> 50) where
+  "I \<preceq> J \<longleftrightarrow> set_of I \<subseteq> set_of J"
 
-lemma refines_refl: "I ⪯ I" by (simp add: refines_def)
-lemma refines_trans: "I ⪯ J ⟹ J ⪯ K ⟹ I ⪯ K" by (auto simp: refines_def)
+lemma refines_refl: "I \<preceq> I" by (simp add: refines_def)
+lemma refines_trans: "I \<preceq> J \<Longrightarrow> J \<preceq> K \<Longrightarrow> I \<preceq> K" by (auto simp: refines_def)
 
-text ‹lem:refine-syntax. On a totally ordered domain, entailment of atomic
-      constraints reduces to one comparison of right operands.›
+text \<open>lem:refine-syntax. On a totally ordered domain, entailment of atomic
+      constraints reduces to one comparison of right operands.\<close>
 
-lemma refine_lt:   ― ‹dateTime, lt: (dt,lt,r1) ⪯ (dt,lt,r2) ⟷ r1 ≤ r2›
-  "den_lt r1 ⪯ den_lt r2 ⟷ r1 ≤ r2"
+lemma refine_lt:   \<comment> \<open>dateTime, lt: (dt,lt,r1) \<preceq> (dt,lt,r2) \<longleftrightarrow> r1 \<le> r2\<close>
+  "den_lt r1 \<preceq> den_lt r2 \<longleftrightarrow> r1 \<le> r2"
   by (auto simp: refines_def)
 
-lemma refine_gt:   ― ‹dual for gt›
-  "den_gt r1 ⪯ den_gt r2 ⟷ r2 ≤ r1"
+lemma refine_gt:   \<comment> \<open>dual for gt\<close>
+  "den_gt r1 \<preceq> den_gt r2 \<longleftrightarrow> r2 \<le> r1"
   by (auto simp: refines_def)
 
-lemma refine_lteq: ― ‹elapsedTime/meteredTime, lteq: r1 ≤ r2›
-  "den_lteq r1 ⪯ den_lteq r2 ⟷ r1 ≤ r2"
+lemma refine_lteq: \<comment> \<open>elapsedTime/meteredTime, lteq: r1 \<le> r2\<close>
+  "den_lteq r1 \<preceq> den_lteq r2 \<longleftrightarrow> r1 \<le> r2"
   by (auto simp: refines_def)
 
-lemma refine_gteq: ― ‹delayPeriod, gteq: r1 ≥ r2›
-  "den_gteq r1 ⪯ den_gteq r2 ⟷ r2 ≤ r1"
+lemma refine_gteq: \<comment> \<open>delayPeriod, gteq: r1 \<ge> r2\<close>
+  "den_gteq r1 \<preceq> den_gteq r2 \<longleftrightarrow> r2 \<le> r1"
   by (auto simp: refines_def)
 
-text ‹Hence atomic ⪯ is decidable by a single comparison (the EPR / Ord tier).›
+text \<open>Hence atomic \<preceq> is decidable by a single comparison (the EPR / Ord tier).\<close>
 
 end
