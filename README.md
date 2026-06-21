@@ -1,6 +1,6 @@
 # ODRL Temporal Conflict-Detection Benchmark
 
-![Problems](https://img.shields.io/badge/problems-71-success)
+![Problems](https://img.shields.io/badge/problems-72-success)
 ![Formats](https://img.shields.io/badge/formats-TPTP%20%2B%20SMT--LIB-informational)
 ![Vampire](https://img.shields.io/badge/Vampire-5.0.1-1f6feb)
 ![E](https://img.shields.io/badge/E%20prover-3.3.2-1f6feb)
@@ -9,7 +9,7 @@
 ![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)
 ![License](https://img.shields.io/badge/license-see%20LICENSE-lightgrey)
 
-A benchmark of 71 conflict-detection problems over the temporal operands of ODRL
+A benchmark of 72 conflict-detection problems over the temporal operands of ODRL
 (`dateTime`, `delayPeriod`, `elapsedTime`, `meteredTime`, `timeInterval`),
 accompanying the paper *Sort-Stratified Semantics for ODRL* (Mustafa et al.).
 Each problem is emitted in two formats from a single description: a TPTP `.p` file
@@ -20,7 +20,7 @@ four reasoners.
 
 ## Contents
 
-- 71 problems in 15 categories, IDs ODRL800 to ODRL870
+- 72 problems in 15 categories, IDs ODRL800 to ODRL871
 - 8 background axiom families (order, duration, denotation and the verdict algebra,
   precedence; recurrence, the cross-operand frame condition, and the simple temporal
   network are inlined in the arithmetic tiers)
@@ -61,7 +61,7 @@ uv run check_benchmark.py Problems --timeout 20
 
 Vampire and E are run over the `.p` files, Z3 and cvc5 over the `.smt2` files. Each
 reasoner's reported status is checked against the expected status stored in the problem.
-`check_benchmark.py` also verifies the structure (71 problems, 15 categories, every
+`check_benchmark.py` also verifies the structure (72 problems, 15 categories, every
 problem paired across `.p`, `.smt2`, and `.ttl`), checks that the verdict recorded in
 the two encodings agrees, and, when all four solvers are present, reports per-solver
 coverage and flags any answer that disagrees with the declared status.
@@ -88,7 +88,7 @@ disagreement is a wrong verdict; a `Timeout` or `GaveUp` is an undecided result.
 
 The reasoners separate by what each can decide. The order fragment is FOF and is decided
 by all four. The arithmetic fragments are TFF over `$int`, which E does not support, so E
-decides exactly the 48 order problems. Z3 and cvc5 decide all 71. Vampire decides 62: the
+decides exactly the 48 order problems. Z3 and cvc5 decide all 72. Vampire decides 62: the
 order problems plus the cross-operand, capstone, and runtime conflicts (each a single
 difference or equality-pinned bound) and the two periodic-compatible cases (a shared
 occurrence it can exhibit). The cases only Z3 and cvc5 decide are the periodic conflicts
@@ -104,7 +104,7 @@ If you use this benchmark, please cite:
 
 (BibTeX to be added once the proceedings entry is available.)
 
-The TPTP problems are contributed to the TPTP library (Mustafa and Sutcliffe).
+The TPTP problems will be contributed to the TPTP library (Mustafa and Sutcliffe).
 
 ## License
 

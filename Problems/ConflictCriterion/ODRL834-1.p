@@ -7,7 +7,7 @@
 %           : excludes i10: prec(i10,i10,o,c) <=> leq(i10,i10) is TRUE. No shared instant ->
 %           : disjoint -> Conflict (open upper flips 833).
 %
-% Refs     : [Anonymous26d] Anonymous. Sort-Stratified Semantics for ODRL: Resolving Temporal-Sort Ambiguity in Policy Constraints. LPAR-26 (anonymized for review).
+% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
 % Source   : anonymous
 % Authors  : anonymous
 % Names    : ODRL834-1.p

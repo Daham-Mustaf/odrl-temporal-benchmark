@@ -5,7 +5,7 @@
 % Version  : 1.0
 % English  : dateTime is disjoint (conflict), elapsedTime compatible, delayPeriod silent (unknown); conflict beats the unknown so the and-fold is conflict even with an unknown present.
 %
-% Refs     : [Anonymous26d] Anonymous. Sort-Stratified Semantics for ODRL: Resolving Temporal-Sort Ambiguity in Policy Constraints. LPAR-26 (anonymized for review).
+% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
 % Source   : anonymous
 % Authors  : anonymous
 % Names    : ODRL862-1.p

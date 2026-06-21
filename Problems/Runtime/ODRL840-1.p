@@ -5,7 +5,7 @@
 % Version  : 1.0
 % English  : C1 cap P10D and C2 cap P8D are statically Compatible, but metered=4+5=9 violates C2 (9<=8 fails). Thm. static-runtime.
 %
-% Refs     : [Anonymous26d] Anonymous. Sort-Stratified Semantics for ODRL: Resolving Temporal-Sort Ambiguity in Policy Constraints. LPAR-26 (anonymized for review).
+% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
 % Source   : anonymous
 % Authors  : anonymous
 % Names    : ODRL840-1.p

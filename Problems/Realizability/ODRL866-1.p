@@ -5,7 +5,7 @@
 % Version  : 1.0
 % English  : One party's rule requires dateTime gteq 2026-03-01 and dateTime lt 2026-06-01; the window is non-empty (the lower bound itself satisfies it), so the policy is satisfiable. Realizable.
 %
-% Refs     : [Anonymous26d] Anonymous. Sort-Stratified Semantics for ODRL: Resolving Temporal-Sort Ambiguity in Policy Constraints. LPAR-26 (anonymized for review).
+% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
 % Source   : anonymous
 % Authors  : anonymous
 % Names    : ODRL866-1.p

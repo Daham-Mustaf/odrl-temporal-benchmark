@@ -109,4 +109,43 @@ PROBLEMS = [
         "already conflicts."),
        _ttl("P30D","2026-01-01","P45D","2027-06-01"),
        _conflict(0,30,516,45), _smt(0,30,516,45)),
-]
+    _P("ODRL871",
+       "timeInterval eq P30D both (anchor day 0); dateTime windows [Jan1,Jan6] & [Jan4,Feb4] -> Conflict",
+       "Conflict", "unsat", "Hard",
+       ("Windowed recurrence conflict. Both policies recur every P30D from 2026-01-01, so their\n"
+        "schedules coincide in Z (the gcd test alone reports Compatible). The dateTime windows are\n"
+        "[2026-01-01,2026-01-06] (offer) and [2026-01-04,2026-02-04] (request); their overlap\n"
+        "[2026-01-04,2026-01-06] contains no occurrence (occurrences fall on 2026-01-01,\n"
+        "2026-01-31, ...). A shared occurrence exists but none lies in the joint window, the case\n"
+        "lem:windowed-rec handles. Each policy alone is realizable (offer 2026-01-01, request 2026-01-31)."),
+       '''@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+        @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+        @prefix drk:  <http://w3id.org/drk/ontology/> .
+        drk:policyA a odrl:Set ;
+          odrl:permission [
+            odrl:action odrl:use ;
+            odrl:constraint [
+              odrl:and (
+                [ odrl:leftOperand odrl:dateTime ; odrl:operator odrl:gteq ; odrl:rightOperand "2026-01-01"^^xsd:date ]
+                [ odrl:leftOperand odrl:dateTime ; odrl:operator odrl:lteq ; odrl:rightOperand "2026-01-06"^^xsd:date ]
+                [ odrl:leftOperand odrl:timeInterval ; odrl:operator odrl:eq ; odrl:rightOperand "P30D"^^xsd:duration ; drk:anchor "2026-01-01"^^xsd:date ]
+              ) ]
+          ] .
+        drk:policyB a odrl:Set ;
+          odrl:permission [
+            odrl:action odrl:use ;
+            odrl:constraint [
+              odrl:and (
+                [ odrl:leftOperand odrl:dateTime ; odrl:operator odrl:gteq ; odrl:rightOperand "2026-01-04"^^xsd:date ]
+                [ odrl:leftOperand odrl:dateTime ; odrl:operator odrl:lteq ; odrl:rightOperand "2026-02-04"^^xsd:date ]
+                [ odrl:leftOperand odrl:timeInterval ; odrl:operator odrl:eq ; odrl:rightOperand "P30D"^^xsd:duration ; drk:anchor "2026-01-01"^^xsd:date ]
+              ) ]
+          ] .''',
+              ("![T:$int,K:$int,M:$int]: ~($greatereq(K,0) & $greatereq(M,0) & "
+                "T = $sum(0, $product(30, K)) & T = $sum(0, $product(30, M)) & "
+                "$greatereq(T,0) & $lesseq(T,5) & $greatereq(T,3) & $lesseq(T,34))"),
+              ("(assert (>= k 0))\n(assert (>= m 0))\n"
+                "(assert (= t (+ 0 (* 30 k))))\n(assert (= t (+ 0 (* 30 m))))\n"
+                "(assert (>= t 0))\n(assert (<= t 5))\n"
+                "(assert (>= t 3))\n(assert (<= t 34))")),
+        ]

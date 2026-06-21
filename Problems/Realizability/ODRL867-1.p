@@ -7,7 +7,7 @@
 %           : elapsedTime lteq P8D cap. The sequence cannot complete within the cap (10 > 8), so the policy is
 %           : internally unsatisfiable. STN: p1>=5, p2-p1>=5, p2<=8 is infeasible. Unrealizable.
 %
-% Refs     : [Anonymous26d] Anonymous. Sort-Stratified Semantics for ODRL: Resolving Temporal-Sort Ambiguity in Policy Constraints. LPAR-26 (anonymized for review).
+% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
 % Source   : anonymous
 % Authors  : anonymous
 % Names    : ODRL867-1.p

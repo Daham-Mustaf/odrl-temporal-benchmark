@@ -12,9 +12,10 @@ from dataclasses import dataclass
 
 REFS = {
     "temporal2026": (
-        "[Anonymous26d] Anonymous. "
-        "Sort-Stratified Semantics for ODRL: Resolving Temporal-Sort "
-        "Ambiguity in Policy Constraints. LPAR-26 (anonymized for review)."
+        "[MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, "
+        "C. Quix, S. Geisler, S. Decker, R. Haque. "
+        "Sort-Stratified Semantics for Temporal Conflict Detection in "
+        "ODRL Policies., 2026."
     ),
 }
 

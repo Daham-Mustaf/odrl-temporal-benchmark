@@ -4,7 +4,7 @@
 ; Axioms   : timeInterval eq P30D & eq P45D, aligned anchors -> Compatible
 ; Version  : 1.0
 ; Authors  : anonymous
-; Refs     : [Anonymous26d] Anonymous. Sort-Stratified Semantics for ODRL: Resolving Temporal-Sort Ambiguity in Policy Constraints. LPAR-26 (anonymized for review).
+; Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
 ; Source   : anonymous
 ; Names    : ODRL816-1.smt2
 ; Status   : sat

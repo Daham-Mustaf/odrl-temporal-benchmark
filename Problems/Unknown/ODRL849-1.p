@@ -7,7 +7,7 @@
 %           : but delayPeriod is constrained only by the offer (request silent -> unknown). Kleene min:
 %           : policy_verdict(compatible, unknown) = unknown. The pair is underdetermined, not a conflict.
 %
-% Refs     : [Anonymous26d] Anonymous. Sort-Stratified Semantics for ODRL: Resolving Temporal-Sort Ambiguity in Policy Constraints. LPAR-26 (anonymized for review).
+% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
 % Source   : anonymous
 % Authors  : anonymous
 % Names    : ODRL849-1.p

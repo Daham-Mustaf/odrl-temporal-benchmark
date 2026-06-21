@@ -6,7 +6,7 @@
 % English  : Provider andSequence delayPeriod gteq P5D then gteq P5D forces span >= 10,
 %           : but consumer elapsedTime lteq P8D forces span <= 8. 10 <= 8: negative cycle. Conflict.
 %
-% Refs     : [Anonymous26d] Anonymous. Sort-Stratified Semantics for ODRL: Resolving Temporal-Sort Ambiguity in Policy Constraints. LPAR-26 (anonymized for review).
+% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
 % Source   : anonymous
 % Authors  : anonymous
 % Names    : ODRL830-1.p

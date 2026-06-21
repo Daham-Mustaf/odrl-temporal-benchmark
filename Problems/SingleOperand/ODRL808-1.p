@@ -6,7 +6,7 @@
 % English  : delayPeriod: gteq P1D -> [1,+inf)   gteq P5D -> [5,+inf)
 %           : Two lower bounds; effective delay max(1,5)=5 is satisfiable. Compatible.
 %
-% Refs     : [Anonymous26d] Anonymous. Sort-Stratified Semantics for ODRL: Resolving Temporal-Sort Ambiguity in Policy Constraints. LPAR-26 (anonymized for review).
+% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
 % Source   : anonymous
 % Authors  : anonymous
 % Names    : ODRL808-1.p

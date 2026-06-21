@@ -6,7 +6,7 @@
 % English  : meteredTime eq P5D (me=5) & elapsedTime lteq P10D (el<=10).
 %           : Phi (me <= el) holds with el in [5,10]. Compatible (witness me=5, el=10).
 %
-% Refs     : [Anonymous26d] Anonymous. Sort-Stratified Semantics for ODRL: Resolving Temporal-Sort Ambiguity in Policy Constraints. LPAR-26 (anonymized for review).
+% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
 % Source   : anonymous
 % Authors  : anonymous
 % Names    : ODRL822-1.p

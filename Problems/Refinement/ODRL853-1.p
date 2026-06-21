@@ -5,7 +5,7 @@
 % Version  : 1.0
 % English  : dateTime window [2026-01-01,2026-01-21] is NOT contained in [2026-01-01,2026-01-11] (upper 21 > 11). interval_subsumes fails. NotRefines.
 %
-% Refs     : [Anonymous26d] Anonymous. Sort-Stratified Semantics for ODRL: Resolving Temporal-Sort Ambiguity in Policy Constraints. LPAR-26 (anonymized for review).
+% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
 % Source   : anonymous
 % Authors  : anonymous
 % Names    : ODRL853-1.p

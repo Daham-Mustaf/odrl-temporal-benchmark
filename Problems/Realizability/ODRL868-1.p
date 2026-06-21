@@ -6,7 +6,7 @@
 % English  : Same policy with the cap relaxed to elapsedTime lteq P12D. The two P5D gaps fit (10 <= 12), so a
 %           : valid schedule exists (e.g. p1=5, p2=10). STN: p1>=5, p2-p1>=5, p2<=12 is feasible. Realizable.
 %
-% Refs     : [Anonymous26d] Anonymous. Sort-Stratified Semantics for ODRL: Resolving Temporal-Sort Ambiguity in Policy Constraints. LPAR-26 (anonymized for review).
+% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
 % Source   : anonymous
 % Authors  : anonymous
 % Names    : ODRL868-1.p

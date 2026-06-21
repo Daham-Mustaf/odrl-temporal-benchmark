@@ -4,7 +4,7 @@
 ; Axioms   : delays >= P5D,P5D within deadline P12D -> Compatible
 ; Version  : 1.0
 ; Authors  : anonymous
-; Refs     : [Anonymous26d] Anonymous. Sort-Stratified Semantics for ODRL: Resolving Temporal-Sort Ambiguity in Policy Constraints. LPAR-26 (anonymized for review).
+; Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
 ; Source   : anonymous
 ; Names    : ODRL829-1.smt2
 ; Status   : sat

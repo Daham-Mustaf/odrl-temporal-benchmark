@@ -1,23 +1,27 @@
 ; --------------------------------------------------------------------------
-; File     : ODRL821-1.smt2
+; File     : ODRL871-1.smt2
 ; Domain   : ODRL Policy / Temporal Decomposition
-; Axioms   : meteredTime eq P20D & elapsedTime lteq P10D -> Conflict (via Phi)
+; Axioms   : timeInterval eq P30D both (anchor day 0); dateTime windows [Jan1,Jan6] & [Jan4,Feb4] -> Conflict
 ; Version  : 1.0
 ; Authors  : anonymous
 ; Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
 ; Source   : anonymous
-; Names    : ODRL821-1.smt2
+; Names    : ODRL871-1.smt2
 ; Status   : unsat
-; Comments : Verdict: Conflict  Category: CrossOperand  Difficulty: Medium
+; Comments : Verdict: Conflict  Category: Periodic  Difficulty: Hard
 ; --------------------------------------------------------------------------
 
 (set-logic QF_LIA)
-(declare-const me Int)
-(declare-const el Int)
-(assert (>= me 0))
-(assert (>= el 0))
-(assert (<= me el))
-(assert (= me 20))
-(assert (<= el 10))
+(declare-const t Int)
+(declare-const k Int)
+(declare-const m Int)
+(assert (>= k 0))
+(assert (>= m 0))
+(assert (= t (+ 0 (* 30 k))))
+(assert (= t (+ 0 (* 30 m))))
+(assert (>= t 0))
+(assert (<= t 5))
+(assert (>= t 3))
+(assert (<= t 34))
 (check-sat)
 (exit)
