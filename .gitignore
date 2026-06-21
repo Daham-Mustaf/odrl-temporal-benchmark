@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.bak
+*-backup/
+.venv/
+
+# the reasoners are a runtime dependency, not committed
+build/
+*.o
+/Check.md
