@@ -1,8 +1,8 @@
 # ODRL Temporal Sort: Isabelle/HOL formalization scaffold
 
 ## TODO
-achine-checked
-development  
+Machine-checked
+development  the formlisation is yet not complited!
 
 ## Build
 
