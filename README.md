@@ -8,6 +8,7 @@
 ![cvc5](https://img.shields.io/badge/cvc5-1.3.4-8957e5)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-3776ab?logo=python&logoColor=white)
 ![License](https://img.shields.io/badge/license-see%20LICENSE-lightgrey)
+[![arXiv](https://img.shields.io/badge/arXiv-2606.23442-b31b1b.svg)](https://arxiv.org/abs/2606.23442)
 
 A benchmark of 72 conflict-detection problems over the temporal operands of ODRL
 (`dateTime`, `delayPeriod`, `elapsedTime`, `meteredTime`, `timeInterval`),
@@ -99,13 +100,34 @@ feasibility of a difference system over a whole trace). No solver returns a wron
 
 If you use this benchmark, please cite:
 
-> D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, S. Geisler, C. Quix, S. Decker.
-> *Sort-Stratified Semantics for ODRL.*
+D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler,
+S. Decker, R. Haque. "Sort-Stratified Semantics for Temporal Conflict
+Detection in ODRL Policies." arXiv:2606.23442, 2026.
+https://arxiv.org/abs/2606.23442
 
-(BibTeX to be added once the proceedings entry is available.)
-
+```bibtex
+@misc{mustafa2026sortstratifiedsemanticstemporalconflict,
+      title={Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies},
+      author={Daham M. Mustafa and Diego Collarana and Sabrina Kirrane and Christoph Lange and Christoph Quix and Sandra Geisler and Stefan Decker and Rafiqul Haque},
+      year={2026},
+      eprint={2606.23442},
+      archivePrefix={arXiv},
+      primaryClass={cs.LO},
+      url={https://arxiv.org/abs/2606.23442},
+}
+```
 The TPTP problems will be contributed to the TPTP library (Mustafa and Sutcliffe).
 
 ## License
 
-See `LICENSE`.
+The code (the generators, `check_benchmark.py`, `main.py`) and the Isabelle/HOL
+formalization are licensed under the Apache License 2.0; see [LICENSE](LICENSE)
+and [NOTICE](NOTICE).
+
+The benchmark problems under [`Problems/`](Problems/) (the `.p`, `.smt2`, and
+`.ttl` files and the bundled axioms) are licensed under
+[CC BY 4.0](Problems/LICENSE).
+
+If you use this benchmark, please cite the accompanying paper (see the Citation
+section above or [CITATION.cff](CITATION.cff)); citing it satisfies the CC BY
+attribution requirement.

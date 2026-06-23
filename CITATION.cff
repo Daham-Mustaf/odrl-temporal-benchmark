@@ -1,0 +1,65 @@
+cff-version: 1.2.0
+message: "If you use this benchmark, please cite the accompanying paper (preferred-citation below)."
+title: "ODRL Temporal Conflict-Detection Benchmark"
+abstract: >-
+  A benchmark of 72 conflict-detection problems over the temporal operands of
+  ODRL (dateTime, delayPeriod, elapsedTime, meteredTime, timeInterval). Each
+  problem is emitted in two cross-validated formats, TPTP (.p) for first-order
+  provers and SMT-LIB (.smt2) for SMT solvers, together with the ODRL policy
+  pair in Turtle (.ttl).
+type: dataset
+license: CC-BY-4.0
+repository-code: "https://github.com/Daham-Mustaf/odrl-temporal-benchmark"
+authors:
+  - given-names: "Daham M."
+    family-names: Mustafa
+  - given-names: Diego
+    family-names: Collarana
+  - given-names: Sabrina
+    family-names: Kirrane
+  - given-names: Christoph
+    family-names: Lange
+  - given-names: Christoph
+    family-names: Quix
+  - given-names: Sandra
+    family-names: Geisler
+  - given-names: Stefan
+    family-names: Decker
+  - given-names: Rafiqul
+    family-names: Haque
+keywords:
+  - ODRL
+  - usage control
+  - conflict detection
+  - automated reasoning
+  - theorem proving
+  - TPTP
+  - SMT-LIB
+  - temporal reasoning
+  - data spaces
+preferred-citation:
+  type: article
+  title: "Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies"
+  year: 2026
+  url: "https://arxiv.org/abs/2606.23442"
+  identifiers:
+    - type: other
+      value: "arXiv:2606.23442"
+      description: "arXiv preprint (cs.LO)"
+  authors:
+    - given-names: "Daham M."
+      family-names: Mustafa
+    - given-names: Diego
+      family-names: Collarana
+    - given-names: Sabrina
+      family-names: Kirrane
+    - given-names: Christoph
+      family-names: Lange
+    - given-names: Christoph
+      family-names: Quix
+    - given-names: Sandra
+      family-names: Geisler
+    - given-names: Stefan
+      family-names: Decker
+    - given-names: Rafiqul
+      family-names: Haque

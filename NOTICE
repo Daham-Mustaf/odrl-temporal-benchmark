@@ -1,0 +1,24 @@
+ODRL Temporal Conflict-Detection Benchmark
+Copyright 2026 Daham Mustafa
+
+This product includes software and benchmark data developed for the paper
+"Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies"
+(Mustafa et al., arXiv:2606.23442).
+
+Licensing summary:
+  * The benchmark problems under Problems/ (the .p, .smt2, and .ttl files,
+    together with the bundled background axioms) are licensed under the
+    Creative Commons Attribution 4.0 International License (CC BY 4.0).
+    See Problems/LICENSE.
+  * All other files (the generators, check_benchmark.py, main.py, and the
+    Isabelle/HOL formalization) are licensed under the Apache License,
+    Version 2.0. See LICENSE.
+
+If you use this benchmark, please cite:
+  D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler,
+  S. Decker, R. Haque. "Sort-Stratified Semantics for Temporal Conflict
+  Detection in ODRL Policies." arXiv:2606.23442 (2026).
+  https://arxiv.org/abs/2606.23442
+
+See CITATION.cff for machine-readable citation metadata. Attribution under
+CC BY 4.0 is satisfied by citing the paper above.
