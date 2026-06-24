@@ -58,6 +58,7 @@ the integrity checker over the whole benchmark:
 ```bash
 bash Generators/run_reasoners.sh Problems/<Category> 20
 uv run check_benchmark.py Problems --timeout 20
+uv run check_benchmark.py Problems --timeout 20 --csv results.csv
 ```
 
 Vampire and E are run over the `.p` files, Z3 and cvc5 over the `.smt2` files. Each
