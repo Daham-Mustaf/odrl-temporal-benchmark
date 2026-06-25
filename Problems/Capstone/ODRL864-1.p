@@ -8,9 +8,9 @@
 %           : the request. The vector is [compatible, compatible, unknown, compatible], so the and-fold is Unknown
 %           : -- a single silent operand keeps the whole policy pair underdetermined.
 %
-% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
-% Source   : anonymous
-% Authors  : anonymous
+% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies. arXiv:2606.23442, 2026.
+% Source   : https://github.com/Daham-Mustaf/odrl-temporal-benchmark
+% Authors  : Mustafa, D.
 % Names    : ODRL864-1.p
 %
 % Status   : Theorem
@@ -18,7 +18,7 @@
 % Relation : verdict
 % SPC      : FOF_THM_RFN
 %
-% Comments : Temporal decomposition tier. LPAR-26 (anonymized).
+% Comments : Temporal decomposition tier.
 %           : Policy source: Policies/ODRL864-policy.ttl
 %--------------------------------------------------------------------------
 include('Axioms/ORD000-0.ax').

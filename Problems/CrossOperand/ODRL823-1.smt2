@@ -1,14 +1,15 @@
 ; --------------------------------------------------------------------------
 ; File     : ODRL823-1.smt2
 ; Domain   : ODRL Policy / Temporal Decomposition
-; Axioms   : meteredTime eq P20D & elapsedTime eq P10D -> Conflict (via Phi)
+; Problem  : meteredTime eq P20D & elapsedTime eq P10D -> Conflict (via Phi)
 ; Version  : 1.0
-; Authors  : anonymous
-; Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
-; Source   : anonymous
+; Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies. arXiv:2606.23442, 2026.
+; Source   : https://github.com/Daham-Mustaf/odrl-temporal-benchmark
+; Authors  : Mustafa, D.
 ; Names    : ODRL823-1.smt2
 ; Status   : unsat
-; Comments : Verdict: Conflict  Category: CrossOperand  Difficulty: Medium
+; Verdict  : Conflict
+; Comments : Category: CrossOperand  Difficulty: Medium
 ; --------------------------------------------------------------------------
 
 (set-logic QF_LIA)

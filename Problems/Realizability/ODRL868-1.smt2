@@ -1,14 +1,15 @@
 ; --------------------------------------------------------------------------
 ; File     : ODRL868-1.smt2
 ; Domain   : ODRL Policy / Temporal Decomposition
-; Axioms   : andSequence fits within its cap -> Realizable
+; Problem  : andSequence fits within its cap -> Realizable
 ; Version  : 1.0
-; Authors  : anonymous
-; Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
-; Source   : anonymous
+; Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies. arXiv:2606.23442, 2026.
+; Source   : https://github.com/Daham-Mustaf/odrl-temporal-benchmark
+; Authors  : Mustafa, D.
 ; Names    : ODRL868-1.smt2
 ; Status   : sat
-; Comments : Verdict: Realizable  Category: Realizability  Difficulty: Medium
+; Verdict  : Realizable
+; Comments : Category: Realizability  Difficulty: Medium
 ; --------------------------------------------------------------------------
 
 (set-logic QF_LIA)

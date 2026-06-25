@@ -1,14 +1,15 @@
 ; --------------------------------------------------------------------------
 ; File     : ODRL832-1.smt2
 ; Domain   : ODRL Policy / Temporal Decomposition
-; Axioms   : [i0,i10] vs [i5,i15] -> Compatible (overlap)
+; Problem  : [i0,i10] vs [i5,i15] -> Compatible (overlap)
 ; Version  : 1.0
-; Authors  : anonymous
-; Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
-; Source   : anonymous
+; Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies. arXiv:2606.23442, 2026.
+; Source   : https://github.com/Daham-Mustaf/odrl-temporal-benchmark
+; Authors  : Mustafa, D.
 ; Names    : ODRL832-1.smt2
 ; Status   : sat
-; Comments : Verdict: Compatible  Category: ConflictCriterion  Difficulty: Easy
+; Verdict  : Compatible
+; Comments : Category: ConflictCriterion  Difficulty: Easy
 ; --------------------------------------------------------------------------
 
 (set-logic QF_LIA)

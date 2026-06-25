@@ -1,14 +1,15 @@
 ; --------------------------------------------------------------------------
 ; File     : ODRL867-1.smt2
 ; Domain   : ODRL Policy / Temporal Decomposition
-; Axioms   : andSequence demands more delay than its own cap -> Unrealizable
+; Problem  : andSequence demands more delay than its own cap -> Unrealizable
 ; Version  : 1.0
-; Authors  : anonymous
-; Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
-; Source   : anonymous
+; Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies. arXiv:2606.23442, 2026.
+; Source   : https://github.com/Daham-Mustaf/odrl-temporal-benchmark
+; Authors  : Mustafa, D.
 ; Names    : ODRL867-1.smt2
 ; Status   : unsat
-; Comments : Verdict: Unrealizable  Category: Realizability  Difficulty: Medium
+; Verdict  : Unrealizable
+; Comments : Category: Realizability  Difficulty: Medium
 ; --------------------------------------------------------------------------
 
 (set-logic QF_LIA)

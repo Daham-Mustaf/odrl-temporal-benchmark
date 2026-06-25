@@ -9,9 +9,9 @@
 %           : both: the dateTime layer needs dt<364 and dt=516, and independently the
 %           : periodic layer needs 15 | 516. Conflict (Vampire closes it via dt<364 & dt=516).
 %
-% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
-% Source   : anonymous
-% Authors  : anonymous
+% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies. arXiv:2606.23442, 2026.
+% Source   : https://github.com/Daham-Mustaf/odrl-temporal-benchmark
+% Authors  : Mustafa, D.
 % Names    : ODRL825-1.p
 %
 % Status   : Theorem
@@ -19,7 +19,7 @@
 % Relation : conflict
 % SPC      : TF0_THM
 %
-% Comments : Temporal decomposition tier. LPAR-26 (anonymized).
+% Comments : Temporal decomposition tier.
 %           : Policy source: Policies/ODRL825-policy.ttl
 %--------------------------------------------------------------------------
 

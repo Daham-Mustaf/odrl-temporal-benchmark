@@ -6,16 +6,19 @@ TPTP / SMT-LIB header rendering for the ODRL temporal benchmark.
 Statistics (% Syntax block) are intentionally omitted; tptp4X computes
 and inserts them during TPTP library processing.
 """
-
 import re
 from dataclasses import dataclass
+
+# Single source of truth for provenance, shared by .p, .ax and .smt2 headers.
+SOURCE  = "https://github.com/Daham-Mustaf/odrl-temporal-benchmark"
+AUTHORS = "Mustafa, D."
 
 REFS = {
     "temporal2026": (
         "[MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, "
         "C. Quix, S. Geisler, S. Decker, R. Haque. "
         "Sort-Stratified Semantics for Temporal Conflict Detection in "
-        "ODRL Policies., 2026."
+        "ODRL Policies. arXiv:2606.23442, 2026."
     ),
 }
 
@@ -30,6 +33,7 @@ SPC = {
     "countersat": "FOF_CSA_RFN",
 }
 
+
 # ---------------------------------------------------------------------------
 # Formula counting (used by _ax_comment in the axiom generator).
 # Counts fof, tff, and cnf: temporal axioms span FOF (Ord tier) and typed
@@ -38,9 +42,11 @@ SPC = {
 def _count_formulae(text):
     return len(re.findall(r"^(?:fof|tff|cnf)\s*\(", text, re.MULTILINE))
 
+
 def _ax_comment(body: str, breakdown: str, include_note: str) -> str:
     n = _count_formulae(body)
     return f"{include_note}\n{n} axioms: {breakdown}."
+
 
 # ---------------------------------------------------------------------------
 # Formatting helpers
@@ -53,12 +59,14 @@ def _wrap(label, text):
         out += f"\n%{pad}: {line.strip()}"
     return out
 
+
 def _smt_wrap(label, text):
     lines = text.strip().split("\n")
     out = f"; {label:<9s}: {lines[0]}"
     for line in lines[1:]:
         out += f"\n;            {line.strip()}"
     return out
+
 
 def _refs_block(keys):
     lines = []
@@ -69,6 +77,7 @@ def _refs_block(keys):
         lines.append(f"% {label}     : {REFS[k]}")
     return "\n".join(lines)
 
+
 def _smt_refs_block(keys):
     lines = []
     for i, k in enumerate(keys):
@@ -78,8 +87,10 @@ def _smt_refs_block(keys):
         lines.append(f"; {label}     : {REFS[k]}")
     return "\n".join(lines)
 
+
 _SEP     = "%--------------------------------------------------------------------------\n"
 _SMT_SEP = "; --------------------------------------------------------------------------\n"
+
 
 # ---------------------------------------------------------------------------
 # Header dataclasses
@@ -121,8 +132,8 @@ class Header:
             + _wrap("English", self.english) + "\n"
             + "%\n"
             + _refs_block(self.refs) + "\n"
-            + "% Source   : anonymous\n"
-            + "% Authors  : anonymous\n"
+            + f"% Source   : {SOURCE}\n"
+            + f"% Authors  : {AUTHORS}\n"
             + f"% Names    : {self.file}\n"
             + "%\n"
             + f"% Status   : {self.status}\n"
@@ -133,6 +144,7 @@ class Header:
             + _wrap("Comments", self.comments) + "\n"
             + _SEP
         )
+
 
 @dataclass
 class AXHeader:
@@ -156,8 +168,8 @@ class AXHeader:
             + _wrap("English", self.english) + "\n"
             + "%\n"
             + _refs_block(self.refs) + "\n"
-            + "% Source   : anonymous\n"
-            + "% Authors  : anonymous\n"
+            + f"% Source   : {SOURCE}\n"
+            + f"% Authors  : {AUTHORS}\n"
             + f"% Names    : {self.file}\n"
             + "%\n"
             + "% Status   : Satisfiable\n"
@@ -167,9 +179,12 @@ class AXHeader:
             + _SEP
         )
 
+
 @dataclass
 class SMTHeader:
-    """SMT-LIB 2 header for .smt2 files."""
+    """SMT-LIB 2 header for .smt2 files. Same canonical field block as the
+    .p header (only the comment character and the omitted English/Relation/SPC
+    lines differ), so a problem's two encodings carry identical metadata."""
     file:     str
     domain:   str
     title:    str
@@ -177,22 +192,25 @@ class SMTHeader:
     refs:     list
     comments: str
     status:   str = "unknown"
+    verdict:  str = ""
 
     def render(self):
         return (
             _SMT_SEP
             + f"; File     : {self.file}\n"
             + f"; Domain   : {DOMAINS[self.domain]}\n"
-            + f"; Axioms   : {self.title}\n"
+            + f"; Problem  : {self.title}\n"
             + f"; Version  : {self.version}\n"
-            + f"; Authors  : anonymous\n"
             + _smt_refs_block(self.refs) + "\n"
-            + "; Source   : anonymous\n"
+            + f"; Source   : {SOURCE}\n"
+            + f"; Authors  : {AUTHORS}\n"
             + f"; Names    : {self.file}\n"
             + f"; Status   : {self.status}\n"
+            + (f"; Verdict  : {self.verdict}\n" if self.verdict else "")
             + _smt_wrap("Comments", self.comments) + "\n"
             + _SMT_SEP
         )
+
 
 # ---------------------------------------------------------------------------
 # Convenience factory used by the problem generator
@@ -217,12 +235,13 @@ def problem_header(p, domain="temporal"):
         refs     = ["temporal2026"],
         spc      = spc,
         comments = (
-            "Temporal decomposition tier. LPAR-26 (anonymized).\n"
+            "Temporal decomposition tier.\n"
             f"Policy source: Policies/{p['id']}-policy.ttl"
         ),
         verdict  = p.get("verdict", ""),
         relation = p.get("relation", ""),
     ).render()
+
 
 # ---------------------------------------------------------------------------
 # Self-test
@@ -251,7 +270,7 @@ tff(bg, axiom, $lesseq(metered, elapsed)).
         english="An upper-bounded dateTime and a fixed later dateTime are disjoint.",
         status="Unsatisfiable", refs=["temporal2026"],
         verdict="Conflict", relation="conflict",
-        comments="Temporal decomposition tier. LPAR-26 (anonymized).\nRequires Axioms/ORD000-0.ax + Axioms/PREC000-0.ax.",
+        comments="Temporal decomposition tier.\nRequires Axioms/ORD000-0.ax + Axioms/PREC000-0.ax.",
     ).render())
 
     print("=== AXHeader (.ax) ===")
@@ -269,8 +288,8 @@ tff(bg, axiom, $lesseq(metered, elapsed)).
         file="ODRL800-1.smt2", domain="temporal",
         title="ConflictCriterion dateTime", version="1.0",
         refs=["temporal2026"],
-        comments="Verdict: Conflict. Category: ConflictCriterion.",
-        status="unsat",
+        comments="Category: ConflictCriterion.",
+        status="unsat", verdict="Conflict",
     ).render()
     print(smt)
     bad = [l for l in smt.splitlines() if l and not l.startswith(";")]

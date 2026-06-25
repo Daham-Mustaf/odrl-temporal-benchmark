@@ -10,9 +10,9 @@
 %           : 2026-01-31, ...). A shared occurrence exists but none lies in the joint window, the case
 %           : lem:windowed-rec handles. Each policy alone is realizable (offer 2026-01-01, request 2026-01-31).
 %
-% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
-% Source   : anonymous
-% Authors  : anonymous
+% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies. arXiv:2606.23442, 2026.
+% Source   : https://github.com/Daham-Mustaf/odrl-temporal-benchmark
+% Authors  : Mustafa, D.
 % Names    : ODRL871-1.p
 %
 % Status   : Theorem
@@ -20,7 +20,7 @@
 % Relation : conflict
 % SPC      : TF0_THM
 %
-% Comments : Temporal decomposition tier. LPAR-26 (anonymized).
+% Comments : Temporal decomposition tier.
 %           : Policy source: Policies/ODRL871-policy.ttl
 %--------------------------------------------------------------------------
 

@@ -117,8 +117,6 @@ https://arxiv.org/abs/2606.23442
       url={https://arxiv.org/abs/2606.23442},
 }
 ```
-The TPTP problems will be contributed to the TPTP library (Mustafa and Sutcliffe).
-
 ## License
 
 The code (the generators, `check_benchmark.py`, `main.py`) and the Isabelle/HOL

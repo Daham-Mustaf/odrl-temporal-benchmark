@@ -11,7 +11,6 @@ Conventions:
 - If status_smt is None or smt2_asserts is empty, NO .smt2 file is written
   (the problem is FOL-only, e.g. a meta-theorem).
 """
-
 import sys
 from pathlib import Path
 
@@ -96,18 +95,19 @@ def write_smt2_problem(p: dict, out_dir: Path) -> Path | None:
 
     logic = p.get("smt2_logic", "QF_LRA")
     decls = p.get("smt2_decls", "(declare-const x Real)")
+
     smt_header = SMTHeader(
         file     = f"{p['id']}-1.smt2",
         domain   = "temporal",
         title    = p["name"],
         version  = "1.0",
         refs     = ["temporal2026"],
+        status   = p["status_smt"],
+        verdict  = p.get("verdict", ""),
         comments = (
-            f"Verdict: {p['verdict']}  "
             f"Category: {p['subdir']}  "
             f"Difficulty: {p.get('difficulty', 'Easy')}"
         ),
-        status   = p["status_smt"],
     ).render()
 
     content = "\n".join([

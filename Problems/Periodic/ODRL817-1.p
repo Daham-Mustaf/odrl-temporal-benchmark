@@ -6,9 +6,9 @@
 % English  : timeInterval eq P30D (anchor day 0) & eq P45D (anchor day 1).
 %           : Offset 1; gcd(30,45)=15 does not divide 1, so the schedules never coincide.
 %
-% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
-% Source   : anonymous
-% Authors  : anonymous
+% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies. arXiv:2606.23442, 2026.
+% Source   : https://github.com/Daham-Mustaf/odrl-temporal-benchmark
+% Authors  : Mustafa, D.
 % Names    : ODRL817-1.p
 %
 % Status   : Theorem
@@ -16,7 +16,7 @@
 % Relation : conflict
 % SPC      : TF0_THM
 %
-% Comments : Temporal decomposition tier. LPAR-26 (anonymized).
+% Comments : Temporal decomposition tier.
 %           : Policy source: Policies/ODRL817-policy.ttl
 %--------------------------------------------------------------------------
 

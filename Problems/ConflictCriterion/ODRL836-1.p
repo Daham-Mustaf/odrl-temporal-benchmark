@@ -6,9 +6,9 @@
 % English  : dateTime in [i0,i10) (open upper) vs (i10,i20] (open lower). Neither includes
 %           : i10: prec(i10,i10,o,o) <=> leq(i10,i10) is TRUE. Disjoint -> Conflict.
 %
-% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
-% Source   : anonymous
-% Authors  : anonymous
+% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies. arXiv:2606.23442, 2026.
+% Source   : https://github.com/Daham-Mustaf/odrl-temporal-benchmark
+% Authors  : Mustafa, D.
 % Names    : ODRL836-1.p
 %
 % Status   : Theorem
@@ -16,7 +16,7 @@
 % Relation : conflict
 % SPC      : FOF_THM_RFN
 %
-% Comments : Temporal decomposition tier. LPAR-26 (anonymized).
+% Comments : Temporal decomposition tier.
 %           : Policy source: Policies/ODRL836-policy.ttl
 %--------------------------------------------------------------------------
 include('Axioms/ORD000-0.ax').

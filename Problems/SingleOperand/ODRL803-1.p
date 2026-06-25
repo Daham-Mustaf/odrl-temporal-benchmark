@@ -7,9 +7,9 @@
 %           : Open interval (t1,t3); a witness strictly between exists only by density.
 %           : Requires ORD001-0.ax.
 %
-% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
-% Source   : anonymous
-% Authors  : anonymous
+% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies. arXiv:2606.23442, 2026.
+% Source   : https://github.com/Daham-Mustaf/odrl-temporal-benchmark
+% Authors  : Mustafa, D.
 % Names    : ODRL803-1.p
 %
 % Status   : Theorem
@@ -17,7 +17,7 @@
 % Relation : conflict
 % SPC      : FOF_THM_RFN
 %
-% Comments : Temporal decomposition tier. LPAR-26 (anonymized).
+% Comments : Temporal decomposition tier.
 %           : Policy source: Policies/ODRL803-policy.ttl
 %--------------------------------------------------------------------------
 include('Axioms/ORD000-0.ax').

@@ -6,9 +6,9 @@
 % English  : delayPeriod: eq P1D -> {1}   gteq P5D -> [5,+inf)
 %           : 1 < 5 so the exact 1-day delay cannot also be at least 5. Conflict.
 %
-% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies., 2026.
-% Source   : anonymous
-% Authors  : anonymous
+% Refs     : [MCK+26] D. M. Mustafa, D. Collarana, S. Kirrane, C. Lange, C. Quix, S. Geisler, S. Decker, R. Haque. Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies. arXiv:2606.23442, 2026.
+% Source   : https://github.com/Daham-Mustaf/odrl-temporal-benchmark
+% Authors  : Mustafa, D.
 % Names    : ODRL809-1.p
 %
 % Status   : Theorem
@@ -16,7 +16,7 @@
 % Relation : conflict
 % SPC      : FOF_THM_RFN
 %
-% Comments : Temporal decomposition tier. LPAR-26 (anonymized).
+% Comments : Temporal decomposition tier.
 %           : Policy source: Policies/ODRL809-policy.ttl
 %--------------------------------------------------------------------------
 include('Axioms/ORD000-0.ax').
