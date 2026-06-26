@@ -34,6 +34,10 @@ runtime distinction, `or`, `xone`, the three-valued `unknown` verdict, refinemen
 completion, `and` composition, single-policy realizability, and the sort-stratification
 ablation.
 
+## Scope.
+
+We treat conflict detection restricted to ODRL's temporal constraints: the five interval operators (eq, lt, lteq, gt, gteq) over the five timeline operands (dateTime as an instant; delayPeriod, elapsedTime, meteredTime, timeInterval as durations), combined under and, or, xone, and andSequence, and decided both at negotiation time and at runtime. Out of scope by construction: non-temporal constraints; the rule structure beyond constraints (duties, remedies, consequences); the neq and set-based operators; xsd:yearMonthDuration; the three off-timeline operands (event, absoluteTemporalPosition, relativeTemporalPosition); and metric deadlines whose decision would require full metric temporal logic over dense time. The 72 benchmark problems are a discriminating sample, one per mechanism of the semantics and spanning the three decision tiers, not an exhaustive enumeration of operator-operand-combinator combinations.
+
 ## Layout
 
 ```
