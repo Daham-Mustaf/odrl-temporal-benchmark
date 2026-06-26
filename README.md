@@ -1,4 +1,4 @@
-# ODRL Temporal Conflict-Detection Benchmark
+# Sort-Stratified Semantics for Temporal Conflict Detection in ODRL Policies-Benchmark
 
 ![Problems](https://img.shields.io/badge/problems-72-success)
 ![Formats](https://img.shields.io/badge/formats-TPTP%20%2B%20SMT--LIB-informational)
@@ -10,14 +10,15 @@
 ![License](https://img.shields.io/badge/license-see%20LICENSE-lightgrey)
 [![arXiv](https://img.shields.io/badge/arXiv-2606.23442-b31b1b.svg)](https://arxiv.org/abs/2606.23442)
 
-A benchmark of 72 conflict-detection problems over the temporal operands of ODRL
-(`dateTime`, `delayPeriod`, `elapsedTime`, `meteredTime`, `timeInterval`),
-accompanying the paper *Sort-Stratified Semantics for ODRL* (Mustafa et al.).
-Each problem is emitted in two formats from a single description: a TPTP `.p` file
-(for the first-order provers Vampire and E) and an SMT-LIB `.smt2` file (for the SMT
-solvers Z3 and cvc5), together with the ODRL policy pair as Turtle (`.ttl`). The two
-encodings are separate and are cross-validated against each other and across the
-four reasoners.
+A benchmark of 72 problems over the temporal operands of ODRL
+(`dateTime`, `delayPeriod`, `elapsedTime`, `meteredTime`, `timeInterval`), covering
+conflict detection between two policies (an offer against a request) and realizability
+of a single policy, accompanying the paper *Sort-Stratified Semantics for ODRL*
+(Mustafa et al.). Each problem is emitted in two formats from a single description: a
+TPTP `.p` file (for the first-order provers Vampire and E) and an SMT-LIB `.smt2` file
+(for the SMT solvers Z3 and cvc5), together with the ODRL policy pair as Turtle
+(`.ttl`). The two encodings are separate and are cross-validated against each other and
+across the four reasoners.
 
 ## Contents
 
@@ -29,14 +30,29 @@ four reasoners.
 
 Categories: single-operand intervals, periodic recurrence, the cross-operand frame
 condition, the running example (capstone, in joint and verdict-vector forms),
-`andSequence` over a simple temporal network, the conflict criterion, the static and
-runtime distinction, `or`, `xone`, the three-valued `unknown` verdict, refinement,
-completion, `and` composition, single-policy realizability, and the sort-stratification
-ablation.
+`andSequence` over a simple temporal network, the conflict criterion, runtime conflict,
+`or`, `xone`, the three-valued `unknown` verdict, refinement, completion, `and`
+composition, single-policy realizability, and the sort-stratification ablation.
 
-## Scope.
+## Scope
 
-We treat conflict detection restricted to ODRL's temporal constraints: the five interval operators (eq, lt, lteq, gt, gteq) over the five timeline operands (dateTime as an instant; delayPeriod, elapsedTime, meteredTime, timeInterval as durations), combined under and, or, xone, and andSequence, and decided both at negotiation time and at runtime. Out of scope by construction: non-temporal constraints; the rule structure beyond constraints (duties, remedies, consequences); the neq and set-based operators; xsd:yearMonthDuration; the three off-timeline operands (event, absoluteTemporalPosition, relativeTemporalPosition); and metric deadlines whose decision would require full metric temporal logic over dense time. The 72 benchmark problems are a discriminating sample, one per mechanism of the semantics and spanning the three decision tiers, not an exhaustive enumeration of operator-operand-combinator combinations.
+The benchmark targets ODRL's temporal constraints: the five interval operators
+(`eq`, `lt`, `lteq`, `gt`, `gteq`) over the five timeline operands (`dateTime` as an
+instant; `delayPeriod`, `elapsedTime`, `meteredTime`, `timeInterval` as durations),
+combined under `and`, `or`, `xone`, and `andSequence`. It addresses conflict detection
+in two settings: between two policies, an offer against a request, decided both at
+negotiation time and at runtime; and within a single policy (intra-policy),
+realizability, whether a policy's own constraints are jointly satisfiable.
+
+Out of scope by construction: non-temporal constraints; rule structure beyond
+constraints (duties, remedies, consequences); the `neq` and set-based operators;
+`xsd:yearMonthDuration`; the three off-timeline operands (`event`,
+`absoluteTemporalPosition`, `relativeTemporalPosition`); and metric deadlines whose
+decision would require full metric temporal logic over dense time.
+
+The 72 problems are a discriminating sample, one instance per semantic mechanism and
+spanning the three decision tiers, not an exhaustive enumeration of
+operator–operand–combinator combinations.
 
 ## Layout
 
