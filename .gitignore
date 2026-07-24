@@ -9,3 +9,10 @@ build/
 *.o
 /Check.md
 .python-version
+# local scratch
+fix_*.py
+*.patch
+results_before.csv
+repro*.log
+repro_e_type_bug.sh
+test*.p
