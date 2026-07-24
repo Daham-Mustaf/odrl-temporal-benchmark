@@ -108,14 +108,10 @@ the constraints (or the negation of the equation) and checks satisfiability, so 
 confirmed conflict or equation is `unsat` and a compatibility `sat`. A definite
 disagreement is a wrong verdict; a `Timeout` or `GaveUp` is an undecided result.
 
-The reasoners separate by what each can decide. The order fragment is FOF and is decided
-by all four. The arithmetic fragments are TFF over `$int`, which E does not support, so E
-decides exactly the 48 order problems. Z3 and cvc5 decide all 72. Vampire decides 62: the
-order problems plus the cross-operand, capstone, and runtime conflicts (each a single
-difference or equality-pinned bound) and the two periodic-compatible cases (a shared
-occurrence it can exhibit). The cases only Z3 and cvc5 decide are the periodic conflicts
-(a divisibility argument) and the sequence and network-realizability cases (the
-feasibility of a difference system over a whole trace). No solver returns a wrong verdict.
+The reasoners separate by what each can decide. The order fragment is FOF and is decided by all four. The arithmetic fragments are TFF over `$int`. E decides exactly the 48 order problems: it returns GaveUp on 10 of the 24 arithmetic problems and aborts on the other 14 with a type error, typing an arithmetic function term such as `$sum(1,2)` as `$i` rather than `$int` (reproduced on E 3.3.2 and on 3.5.1, reported upstream). Z3 and cvc5 decide all 72. Vampire decides 64: the order problems, the cross-operand, capstone and runtime conflicts (each a single difference or equality-pinned bound), the two periodic-compatible cases (a shared occurrence it can exhibit), and the one-step sequences. The cases only Z3 and cvc5 decide are the periodic conflicts (a divisibility argument), the two-step sequences, and the network-realizability cases (feasibility of a difference system over a whole trace). Within the sequence family the boundary is the size of the difference system, not the family itself. No solver returns a wrong verdict.
+
+
+
 
 ## Citation
 

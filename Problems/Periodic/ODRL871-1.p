@@ -24,8 +24,8 @@
 %           : Policy source: Policies/ODRL871-policy.ttl
 %--------------------------------------------------------------------------
 
-% ─── Named constants and ordering ─────────────────────────────────────
-% ─── Conjecture ────────────────────────────────────────────────────
+%---- Named constants and ordering -------------------------------------
+%---- Conjecture ----------------------------------------------------
 tff(odrl871, conjecture,
     ![T:$int,K:$int,M:$int]: ~($greatereq(K,0) & $greatereq(M,0) & T = $sum(0, $product(30, K)) & T = $sum(0, $product(30, M)) & $greatereq(T,0) & $lesseq(T,5) & $greatereq(T,3) & $lesseq(T,34))).
 %--------------------------------------------------------------------------

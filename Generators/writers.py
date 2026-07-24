@@ -64,13 +64,13 @@ def write_fof_problem(p: dict, out_dir: Path) -> Path:
         conj_id = p["id"].lower()
         lang = p.get("tptp_lang", "fof")   # "tff" for arithmetic (Mod/Diff) tiers
         conjecture_fof = f"{lang}({conj_id}, conjecture,\n    {conj}).\n"
-        conjecture_header = "% \u2500\u2500\u2500 Conjecture " + "\u2500" * 52 + "\n"
+        conjecture_header = "%---- Conjecture " + "-" * 52 + "\n"
 
     content = (
         problem_header(p, "temporal")
         + includes
         + "\n"
-        + "% \u2500\u2500\u2500 Named constants and ordering " + "\u2500" * 37 + "\n"
+        + "%---- Named constants and ordering " + "-" * 37 + "\n"
         + p["fof_extra_decls"]
         + conjecture_header
         + conjecture_fof

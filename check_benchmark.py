@@ -154,7 +154,19 @@ def run_tptp(cmd_builder, path, timeout):
         return m.group(1).lower()
     if "Refutation found" in out or "Theorem" in out or "Proof found" in out:
         return "theorem"
-    return "timeout"
+    # No SZS line. Separate the three reasons that happens instead of calling
+    # them all "timeout": an abort is a defect (in the input or in the prover),
+    # a resource limit is a hardness result, and giving up is neither. Order
+    # matters: a non-zero exit code alone means nothing, Vampire exits non-zero
+    # on a plain time limit.
+    if re.search(r"(?i)(type error|type mismatch|parse error|syntax error|"
+                 r"variable expected|lexer exception|unsupported|cannot parse)", out):
+        return "error"
+    if re.search(r"(?i)(time limit|memory limit|resource ?out|resource limit)", out):
+        return "timeout"
+    if re.search(r"(?i)(refutation not found|incomplete strategy|gave ?up)", out):
+        return "gaveup"
+    return "error" if res.returncode != 0 else "timeout"
 
 
 def vampire_cmd(base, t):

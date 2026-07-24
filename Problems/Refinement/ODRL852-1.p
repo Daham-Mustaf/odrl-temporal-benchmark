@@ -21,11 +21,11 @@
 include('Axioms/ORD000-0.ax').
 include('Axioms/DENOT000-0.ax').
 
-% ─── Named constants and ordering ─────────────────────────────────────
+%---- Named constants and ordering -------------------------------------
 fof(ord_i0_i5, axiom, less(i0, i5)).
 fof(ord_i5_i10, axiom, less(i5, i10)).
 fof(distinct, axiom, $distinct(i0, i5, i10)).
-% ─── Conjecture ────────────────────────────────────────────────────
+%---- Conjecture ----------------------------------------------------
 fof(odrl852, conjecture,
     interval_subsumes(i0, i5, i0, i10)).
 %--------------------------------------------------------------------------

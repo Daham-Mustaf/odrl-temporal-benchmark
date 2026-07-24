@@ -22,12 +22,12 @@
 include('Axioms/ORD000-0.ax').
 include('Axioms/PREC000-0.ax').
 
-% ─── Named constants and ordering ─────────────────────────────────────
+%---- Named constants and ordering -------------------------------------
 fof(ord_i0_i10, axiom, less(i0, i10)).
 fof(ord_i0_i20, axiom, less(i0, i20)).
 fof(ord_i10_i20, axiom, less(i10, i20)).
 fof(distinct, axiom, $distinct(i0, i10, i20)).
-% ─── Conjecture ────────────────────────────────────────────────────
+%---- Conjecture ----------------------------------------------------
 fof(odrl836, conjecture,
     disjoint(i0, i10, c, o, i10, i20, o, c)).
 %--------------------------------------------------------------------------

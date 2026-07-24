@@ -20,11 +20,11 @@
 %--------------------------------------------------------------------------
 include('Axioms/ORD000-0.ax').
 
-% ─── Named constants and ordering ─────────────────────────────────────
+%---- Named constants and ordering -------------------------------------
 fof(ord_jun1_jul1, axiom, less(jun1, jul1)).
 fof(ord_jul1_aug1, axiom, less(jul1, aug1)).
 fof(distinct, axiom, $distinct(jun1, jul1, aug1)).
-% ─── Conjecture ────────────────────────────────────────────────────
+%---- Conjecture ----------------------------------------------------
 fof(odrl847, conjecture,
     ?[X]: (X = jul1 & ((leq(jun1, X) & ~(leq(aug1, X))) | (~(leq(jun1, X)) & leq(aug1, X))))).
 %--------------------------------------------------------------------------

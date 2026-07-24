@@ -12,14 +12,15 @@ SMT QF_IDL (difference constraints). Gaps/deadline are day counts.
 """
 def _P(pid, name, verdict, descr, gaps, deadline):
     n = len(gaps)
-    pts = [f"p{i}" for i in range(n + 1)]
+    pts = [f"p{i}" for i in range(n + 1)]        # SMT-LIB constants: lower case
+    var = [f"P{i}" for i in range(n + 1)]        # TPTP variables: must be upper_word
     parts = []
     for k in range(1, n + 1):
-        parts.append(f"$lesseq(p{k-1},p{k})")
-        parts.append(f"$greatereq($difference(p{k},p{k-1}),{gaps[k-1]})")
-    parts.append(f"$lesseq($difference(p{n},p0),{deadline})")
+        parts.append(f"$lesseq({var[k-1]},{var[k]})")
+        parts.append(f"$greatereq($difference({var[k]},{var[k-1]}),{gaps[k-1]})")
+    parts.append(f"$lesseq($difference({var[n]},{var[0]}),{deadline})")
     body = " & ".join(parts)
-    qv = ",".join(f"{p}:$int" for p in pts)
+    qv = ",".join(f"{v}:$int" for v in var)
     conj = f"?[{qv}]: ({body})" if verdict == "Compatible" else f"![{qv}]: ~({body})"
     decls = "\n".join(f"(declare-const {p} Int)" for p in pts)
     a = []

@@ -23,7 +23,7 @@ include('Axioms/ORD000-0.ax').
 include('Axioms/DUR000-0.ax').
 include('Axioms/DENOT000-0.ax').
 
-% ─── Named constants and ordering ─────────────────────────────────────
+%---- Named constants and ordering -------------------------------------
 fof(dur_d0, axiom, dur(d0)).
 fof(dur_p1, axiom, dur(p1)).
 fof(dur_p5, axiom, dur(p5)).
@@ -31,7 +31,7 @@ fof(ord_d0_p1, axiom, less(d0, p1)).
 fof(ord_d0_p5, axiom, less(d0, p5)).
 fof(ord_p1_p5, axiom, less(p1, p5)).
 fof(distinct, axiom, $distinct(d0, p1, p5)).
-% ─── Conjecture ────────────────────────────────────────────────────
+%---- Conjecture ----------------------------------------------------
 fof(odrl808, conjecture,
     ?[X]: (leq(p1, X) & leq(p5, X))).
 %--------------------------------------------------------------------------

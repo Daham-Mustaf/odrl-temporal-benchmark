@@ -1,0 +1,59 @@
+diff --git a/Generators/problem_data_sequence.py b/Generators/problem_data_sequence.py
+index e890961..439786f 100644
+--- a/Generators/problem_data_sequence.py
++++ b/Generators/problem_data_sequence.py
+@@ -12,14 +12,15 @@ SMT QF_IDL (difference constraints). Gaps/deadline are day counts.
+ """
+ def _P(pid, name, verdict, descr, gaps, deadline):
+     n = len(gaps)
+-    pts = [f"p{i}" for i in range(n + 1)]
++    pts = [f"p{i}" for i in range(n + 1)]        # SMT-LIB constants: lower case
++    var = [f"P{i}" for i in range(n + 1)]        # TPTP variables: must be upper_word
+     parts = []
+     for k in range(1, n + 1):
+-        parts.append(f"$lesseq(p{k-1},p{k})")
+-        parts.append(f"$greatereq($difference(p{k},p{k-1}),{gaps[k-1]})")
+-    parts.append(f"$lesseq($difference(p{n},p0),{deadline})")
++        parts.append(f"$lesseq({var[k-1]},{var[k]})")
++        parts.append(f"$greatereq($difference({var[k]},{var[k-1]}),{gaps[k-1]})")
++    parts.append(f"$lesseq($difference({var[n]},{var[0]}),{deadline})")
+     body = " & ".join(parts)
+-    qv = ",".join(f"{p}:$int" for p in pts)
++    qv = ",".join(f"{v}:$int" for v in var)
+     conj = f"?[{qv}]: ({body})" if verdict == "Compatible" else f"![{qv}]: ~({body})"
+     decls = "\n".join(f"(declare-const {p} Int)" for p in pts)
+     a = []
+diff --git a/Generators/writers.py b/Generators/writers.py
+index da5de9d..e943c64 100644
+--- a/Generators/writers.py
++++ b/Generators/writers.py
+@@ -64,13 +64,13 @@ def write_fof_problem(p: dict, out_dir: Path) -> Path:
+         conj_id = p["id"].lower()
+         lang = p.get("tptp_lang", "fof")   # "tff" for arithmetic (Mod/Diff) tiers
+         conjecture_fof = f"{lang}({conj_id}, conjecture,\n    {conj}).\n"
+-        conjecture_header = "% \u2500\u2500\u2500 Conjecture " + "\u2500" * 52 + "\n"
++        conjecture_header = "%---- Conjecture " + "-" * 52 + "\n"
+ 
+     content = (
+         problem_header(p, "temporal")
+         + includes
+         + "\n"
+-        + "% \u2500\u2500\u2500 Named constants and ordering " + "\u2500" * 37 + "\n"
++        + "%---- Named constants and ordering " + "-" * 37 + "\n"
+         + p["fof_extra_decls"]
+         + conjecture_header
+         + conjecture_fof
+diff --git a/check_benchmark.py b/check_benchmark.py
+index 490fa8c..32bf0ba 100644
+--- a/check_benchmark.py
++++ b/check_benchmark.py
+@@ -154,6 +154,11 @@ def run_tptp(cmd_builder, path, timeout):
+         return m.group(1).lower()
+     if "Refutation found" in out or "Theorem" in out or "Proof found" in out:
+         return "theorem"
++    # A prover that aborts (type error, syntax error, unsupported feature) exits
++    # non-zero and prints no SZS line. That is not a timeout, and recording it as
++    # one hides both malformed input and prover bugs.
++    if res.returncode != 0 or re.search(r"(?i)\b(type error|syntax error|parse error)\b", out):
++        return "error"
+     return "timeout"

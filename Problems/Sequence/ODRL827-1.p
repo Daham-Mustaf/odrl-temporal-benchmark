@@ -20,8 +20,8 @@
 %           : Policy source: Policies/ODRL827-policy.ttl
 %--------------------------------------------------------------------------
 
-% ─── Named constants and ordering ─────────────────────────────────────
-% ─── Conjecture ────────────────────────────────────────────────────
+%---- Named constants and ordering -------------------------------------
+%---- Conjecture ----------------------------------------------------
 tff(odrl827, conjecture,
-    ?[p0:$int,p1:$int]: ($lesseq(p0,p1) & $greatereq($difference(p1,p0),3) & $lesseq($difference(p1,p0),5))).
+    ?[P0:$int,P1:$int]: ($lesseq(P0,P1) & $greatereq($difference(P1,P0),3) & $lesseq($difference(P1,P0),5))).
 %--------------------------------------------------------------------------

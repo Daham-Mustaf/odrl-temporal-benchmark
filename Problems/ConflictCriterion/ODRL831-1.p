@@ -23,7 +23,7 @@
 include('Axioms/ORD000-0.ax').
 include('Axioms/PREC000-0.ax').
 
-% ─── Named constants and ordering ─────────────────────────────────────
+%---- Named constants and ordering -------------------------------------
 fof(ord_i0_i5, axiom, less(i0, i5)).
 fof(ord_i0_i10, axiom, less(i0, i10)).
 fof(ord_i0_i15, axiom, less(i0, i15)).
@@ -31,7 +31,7 @@ fof(ord_i5_i10, axiom, less(i5, i10)).
 fof(ord_i5_i15, axiom, less(i5, i15)).
 fof(ord_i10_i15, axiom, less(i10, i15)).
 fof(distinct, axiom, $distinct(i0, i5, i10, i15)).
-% ─── Conjecture ────────────────────────────────────────────────────
+%---- Conjecture ----------------------------------------------------
 fof(odrl831, conjecture,
     disjoint(i0, i5, c, c, i10, i15, c, c)).
 %--------------------------------------------------------------------------

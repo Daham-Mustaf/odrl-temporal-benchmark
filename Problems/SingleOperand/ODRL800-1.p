@@ -22,10 +22,10 @@
 include('Axioms/ORD000-0.ax').
 include('Axioms/DENOT000-0.ax').
 
-% ─── Named constants and ordering ─────────────────────────────────────
+%---- Named constants and ordering -------------------------------------
 fof(ord_t2_t3, axiom, less(d20261231, d20270601)).
 fof(distinct,  axiom, $distinct(d20261231, d20270601)).
-% ─── Conjecture ────────────────────────────────────────────────────
+%---- Conjecture ----------------------------------------------------
 fof(odrl800, conjecture,
     ![X]: ~(leq(X, d20261231) & leq(d20270601, X))).
 %--------------------------------------------------------------------------

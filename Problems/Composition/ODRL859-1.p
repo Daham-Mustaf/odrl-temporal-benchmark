@@ -21,8 +21,8 @@
 include('Axioms/ORD000-0.ax').
 include('Axioms/DENOT000-0.ax').
 
-% ─── Named constants and ordering ─────────────────────────────────────
-% ─── Conjecture ────────────────────────────────────────────────────
+%---- Named constants and ordering -------------------------------------
+%---- Conjecture ----------------------------------------------------
 fof(odrl859, conjecture,
     policy_verdict(policy_verdict(compatible, compatible), compatible) = compatible).
 %--------------------------------------------------------------------------
