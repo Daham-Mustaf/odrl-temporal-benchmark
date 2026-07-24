@@ -110,7 +110,14 @@ disagreement is a wrong verdict; a `Timeout` or `GaveUp` is an undecided result.
 
 The reasoners separate by what each can decide. The order fragment is FOF and is decided by all four. The arithmetic fragments are TFF over `$int`. E decides exactly the 48 order problems: it returns GaveUp on 10 of the 24 arithmetic problems and aborts on the other 14 with a type error, typing an arithmetic function term such as `$sum(1,2)` as `$i` rather than `$int` (reproduced on E 3.3.2 and on 3.5.1, reported upstream). Z3 and cvc5 decide all 72. Vampire decides 64: the order problems, the cross-operand, capstone and runtime conflicts (each a single difference or equality-pinned bound), the two periodic-compatible cases (a shared occurrence it can exhibit), and the one-step sequences. The cases only Z3 and cvc5 decide are the periodic conflicts (a divisibility argument), the two-step sequences, and the network-realizability cases (feasibility of a difference system over a whole trace). Within the sequence family the boundary is the size of the difference system, not the family itself. No solver returns a wrong verdict.
 
+## Changes
 
+**v1.1 (2026-07-24).** ODRL827-830 used lowercase quantified variables, which are
+not valid TPTP, so neither Vampire nor E parsed them and the harness recorded both
+as timeouts. Fixed in the generator. Vampire now decides 64/72 (was 62) and the tier
+split is 48/16/8 (was 48/14/10). The result classifier now distinguishes a prover
+abort from a timeout. No verdict changed; no solver returned a wrong answer in
+either version.
 
 
 ## Citation
