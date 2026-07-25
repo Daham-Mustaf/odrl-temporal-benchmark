@@ -16,3 +16,6 @@ results_before.csv
 repro*.log
 repro_e_type_bug.sh
 test*.p
+control-declared.p
+vampire-clausify.log
+apply_szs.py
