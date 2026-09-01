@@ -16,7 +16,7 @@ Conjecture (witness form):
   Conflict   -> ![X]: ~(m1 & m2)   (Theorem / unsat: no shared point)
   Compatible -> ?[X]:  (m1 & m2)   (Theorem / sat:  a shared point exists)
 dateTime values use order-preserving YYYYMMDD integers; durations use day counts.
-TTL prefix: drk: <http://w3id.org/drk/ontology/>
+TTL prefix: drk: <https://w3id.org/drk/ontology/>
 """
 
 def _ttl(opA, valA, isoA, opB, valB, isoB, operand, dt):
@@ -24,7 +24,7 @@ def _ttl(opA, valA, isoA, opB, valB, isoB, operand, dt):
     return f"""\
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
-@prefix drk:  <http://w3id.org/drk/ontology/> .
+@prefix drk:  <https://w3id.org/drk/ontology/> .
 drk:policyA a odrl:Set ;
   odrl:permission [
     odrl:action odrl:use ;

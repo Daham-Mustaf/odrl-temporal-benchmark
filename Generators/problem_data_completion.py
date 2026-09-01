@@ -26,7 +26,7 @@ def _P(pid, name, verdict, descr, v1, v2, expected, ttl):
                          f"(assert (not (= (ite (<= v1 v2) v1 v2) {VNUM[expected]})))"),
     }
 
-P = "@prefix odrl: <http://www.w3.org/ns/odrl/2/> .\n@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .\n@prefix drk:  <http://w3id.org/drk/ontology/> .\n"
+P = "@prefix odrl: <http://www.w3.org/ns/odrl/2/> .\n@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .\n@prefix drk:  <https://w3id.org/drk/ontology/> .\n"
 def two(name, a_op, a_lo, a_val, b_op, b_lo, b_val):  # one policy, odrl:and of two atoms
     def atom(op, lo, val):
         dt = "xsd:dateTime" if lo == "dateTime" else "xsd:duration"

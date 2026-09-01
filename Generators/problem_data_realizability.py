@@ -12,7 +12,7 @@ the Sequence gradient (z3/cvc5 decide, Vampire and E time out on the Presburger 
 
 INST = {"mar1": 59, "jun1": 151}  # day-of-year, 2026-01-01 = 0
 ISO = {"mar1": "2026-03-01", "jun1": "2026-06-01"}
-PFX = "@prefix odrl: <http://www.w3.org/ns/odrl/2/> .\n@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .\n@prefix drk:  <http://w3id.org/drk/ontology/> .\n"
+PFX = "@prefix odrl: <http://www.w3.org/ns/odrl/2/> .\n@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .\n@prefix drk:  <https://w3id.org/drk/ontology/> .\n"
 
 def order_block(cs):
     cs = sorted(set(cs), key=lambda c: INST[c])

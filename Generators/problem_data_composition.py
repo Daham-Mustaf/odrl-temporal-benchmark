@@ -39,7 +39,7 @@ def _P(pid, subdir, name, verdict, descr, vs, expected, ttl):
         "smt2_asserts": f"(assert (not (= {fold_smt(vs)} {VNUM[expected]})))",
     }
 
-PFX = "@prefix odrl: <http://www.w3.org/ns/odrl/2/> .\n@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .\n@prefix drk:  <http://w3id.org/drk/ontology/> .\n"
+PFX = "@prefix odrl: <http://www.w3.org/ns/odrl/2/> .\n@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .\n@prefix drk:  <https://w3id.org/drk/ontology/> .\n"
 def _atom(op, lo, val):
     dt = "xsd:dateTime" if lo == "dateTime" else "xsd:duration"
     return f'        [ odrl:leftOperand odrl:{lo} ; odrl:operator odrl:{op} ; odrl:rightOperand "{val}"^^{dt} ]\n'

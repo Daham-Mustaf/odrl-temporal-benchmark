@@ -19,7 +19,7 @@ def _ttl(bnf_dt_iso, bnf_period, bnf_anchor_iso, bnf_el):
     return f"""\
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
-@prefix drk:  <http://w3id.org/drk/ontology/> .
+@prefix drk:  <https://w3id.org/drk/ontology/> .
 # BSB offer
 drk:policyBSB a odrl:Set ;
   odrl:permission [ odrl:action odrl:use ; odrl:constraint [ odrl:and (
