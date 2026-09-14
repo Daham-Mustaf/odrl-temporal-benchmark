@@ -33,7 +33,7 @@ def _P(pid, name, verdict, descr, gaps, deadline):
         f'odrl:rightOperand "P{g}D"^^xsd:duration ]' for g in gaps)
     ttl = ("@prefix odrl: <http://www.w3.org/ns/odrl/2/> .\n"
            "@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .\n"
-           "@prefix drk:  <http://w3id.org/drk/ontology/> .\n"
+           "@prefix drk:  <https://w3id.org/drk/ontology/> .\n"
            "# provider: each phase at least the stated delay after the previous\n"
            "drk:policyA a odrl:Set ;\n"
            "  odrl:permission [\n    odrl:action odrl:use ;\n"

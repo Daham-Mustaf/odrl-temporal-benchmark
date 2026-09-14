@@ -15,7 +15,7 @@ mirrors it: one shared Int variable (unsat) vs two independent Int variables (sa
 """
 INST334 = 334   # dateTime 2026-12-01, day-of-year (2026-01-01 = 0)
 DUR30 = 30      # duration P30D
-PFX = "@prefix odrl: <http://www.w3.org/ns/odrl/2/> .\n@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .\n@prefix drk:  <http://w3id.org/drk/ontology/> .\n"
+PFX = "@prefix odrl: <http://www.w3.org/ns/odrl/2/> .\n@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .\n@prefix drk:  <https://w3id.org/drk/ontology/> .\n"
 TTL = (PFX +
   "# offer constrains an instant (dateTime); request constrains a duration (elapsedTime).\n"
   "# Different sorts -> no interaction. A naive single-axis reading manufactures a conflict.\n"

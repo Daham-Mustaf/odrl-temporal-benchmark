@@ -46,7 +46,7 @@ def _ttl(kind, offer, branches):
         f'odrl:rightOperand "{ISO[d]}T00:00:00"^^xsd:dateTime ]' for op, d in branches)
     return ("@prefix odrl: <http://www.w3.org/ns/odrl/2/> .\n"
             "@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .\n"
-            "@prefix drk:  <http://w3id.org/drk/ontology/> .\n"
+            "@prefix drk:  <https://w3id.org/drk/ontology/> .\n"
             "# provider offer (single point)\n"
             "drk:policyA a odrl:Set ;\n  odrl:permission [ odrl:action odrl:use ;\n"
             f'    odrl:constraint [ odrl:leftOperand odrl:dateTime ; odrl:operator odrl:{oop} ; '

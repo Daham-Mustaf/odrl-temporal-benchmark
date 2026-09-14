@@ -1,0 +1,106 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix drk:  <https://w3id.org/drk/ontology/> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix :     <https://example.org/odrl-temporal-benchmark/shapes#> .
+
+:PolicyShape a sh:NodeShape ;
+  sh:targetClass odrl:Set ;
+  sh:property [
+    sh:path odrl:permission ;
+    sh:minCount 1 ;
+    sh:node :PermissionShape
+  ] .
+
+:PermissionShape a sh:NodeShape ;
+  sh:property [
+    sh:path odrl:action ;
+    sh:minCount 1 ;
+    sh:hasValue odrl:use
+  ] ;
+  sh:property [
+    sh:path odrl:constraint ;
+    sh:minCount 1 ;
+    sh:node :ConstraintNodeShape
+  ] .
+
+:ConstraintNodeShape a sh:NodeShape ;
+  sh:xone (
+    :AtomicConstraintShape
+    :LogicalConstraintShape
+  ) .
+
+:AtomicConstraintShape a sh:NodeShape ;
+  sh:targetSubjectsOf odrl:leftOperand ;
+  sh:closed true ;
+  sh:property [
+    sh:path odrl:leftOperand ;
+    sh:minCount 1 ; sh:maxCount 1 ;
+    sh:in ( odrl:dateTime odrl:delayPeriod odrl:elapsedTime odrl:meteredTime odrl:timeInterval )
+  ] ;
+  sh:property [
+    sh:path odrl:operator ;
+    sh:minCount 1 ; sh:maxCount 1 ;
+    sh:in ( odrl:eq odrl:lt odrl:lteq odrl:gt odrl:gteq )
+  ] ;
+  sh:property [
+    sh:path odrl:rightOperand ;
+    sh:minCount 1 ; sh:maxCount 1 ;
+    sh:or (
+      [ sh:datatype xsd:dateTime ]
+      [ sh:datatype xsd:duration ]
+    )
+  ] ;
+  sh:property [
+    sh:path drk:anchor ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:date
+  ] ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "dateTime requires an xsd:date or xsd:dateTime right operand." ;
+    sh:select """
+      SELECT $this WHERE {
+        $this odrl:leftOperand odrl:dateTime ; odrl:rightOperand ?value .
+        FILTER (datatype(?value) NOT IN (xsd:date, xsd:dateTime))
+      }
+    """
+  ] ;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "Duration operands require an xsd:duration right operand." ;
+    sh:select """
+      SELECT $this WHERE {
+        $this odrl:leftOperand ?operand ; odrl:rightOperand ?value .
+        FILTER (
+          ?operand IN (odrl:delayPeriod, odrl:elapsedTime, odrl:meteredTime, odrl:timeInterval)
+          && datatype(?value) != xsd:duration
+        )
+      }
+    """
+  ] .
+
+:LogicalConstraintShape a sh:NodeShape ;
+  sh:targetSubjectsOf odrl:and, odrl:or, odrl:xone, odrl:andSequence ;
+  sh:closed true ;
+  # Declare the allowed paths at this level: paths nested only under sh:xone
+  # are not considered by SHACL's closed-shape algorithm.
+  sh:property [ sh:path odrl:and ; sh:maxCount 1 ] ;
+  sh:property [ sh:path odrl:or ; sh:maxCount 1 ] ;
+  sh:property [ sh:path odrl:xone ; sh:maxCount 1 ] ;
+  sh:property [ sh:path odrl:andSequence ; sh:maxCount 1 ] ;
+  sh:xone (
+    [ sh:property [ sh:path odrl:and ; sh:minCount 1 ; sh:maxCount 1 ; sh:node :ConstraintListShape ] ]
+    [ sh:property [ sh:path odrl:or ; sh:minCount 1 ; sh:maxCount 1 ; sh:node :ConstraintListShape ] ]
+    [ sh:property [ sh:path odrl:xone ; sh:minCount 1 ; sh:maxCount 1 ; sh:node :ConstraintListShape ] ]
+    [ sh:property [ sh:path odrl:andSequence ; sh:minCount 1 ; sh:maxCount 1 ; sh:node :ConstraintListShape ] ]
+  ) .
+
+:ConstraintListShape a sh:NodeShape ;
+  sh:property [
+    sh:path ( [ sh:zeroOrMorePath <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> ] <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> ) ;
+    # One-step sequences (ODRL827/828) are intentional benchmark cases. List
+    # members are validated independently through the shapes' global targets,
+    # which also handles nested logical constraints without SHACL recursion.
+    sh:minCount 1
+  ] .

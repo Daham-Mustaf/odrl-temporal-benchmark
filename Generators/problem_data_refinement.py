@@ -23,7 +23,7 @@ def _ttl(c1, c2):
                 f'        [ odrl:leftOperand odrl:dateTime ; odrl:operator odrl:gteq ; odrl:rightOperand "{ISO[lo]}T00:00:00"^^xsd:dateTime ]\n'
                 f'        [ odrl:leftOperand odrl:dateTime ; odrl:operator odrl:lteq ; odrl:rightOperand "{ISO[hi]}T00:00:00"^^xsd:dateTime ]\n'
                 f"      )\n    ]\n  ] .")
-    return ("@prefix odrl: <http://www.w3.org/ns/odrl/2/> .\n@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .\n@prefix drk:  <http://w3id.org/drk/ontology/> .\n"
+    return ("@prefix odrl: <http://www.w3.org/ns/odrl/2/> .\n@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .\n@prefix drk:  <https://w3id.org/drk/ontology/> .\n"
             "# C1: the candidate refinement (narrower window)\n" + pol("policyC1", *c1) +
             "\n# C2: the policy it is checked against (wider window)\n" + pol("policyC2", *c2))
 

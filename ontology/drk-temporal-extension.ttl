@@ -1,0 +1,29 @@
+@prefix drk:     <https://w3id.org/drk/ontology/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix odrl:    <http://www.w3.org/ns/odrl/2/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vann:    <http://purl.org/vocab/vann/> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+<https://w3id.org/drk/ontology/experimental/temporal-extension>
+    a owl:Ontology ;
+    owl:imports <https://w3id.org/drk/ontology/> ;
+    dcterms:created "2026-08-16"^^xsd:date ;
+    dcterms:title "Experimental DRK temporal extension"@en ;
+    dcterms:description
+        "Provisional temporal terms intended for later inclusion in the DRK ontology."@en ;
+    vann:preferredNamespacePrefix "drk" ;
+    vann:preferredNamespaceUri "https://w3id.org/drk/ontology/" ;
+    owl:versionInfo "Experimental; not yet part of the published DRK ontology."@en .
+
+drk:anchor
+    a owl:DatatypeProperty ;
+    rdfs:isDefinedBy
+        <https://w3id.org/drk/ontology/experimental/temporal-extension> ;
+    rdfs:label "recurrence anchor"@en ;
+    rdfs:comment
+        "The calendar date from which the recurring schedule denoted by an ODRL timeInterval constraint is calculated."@en ;
+    rdfs:domain odrl:Constraint ;
+    rdfs:range xsd:date ;
+    vann:term_status "experimental" .

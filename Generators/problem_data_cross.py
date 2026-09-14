@@ -16,7 +16,7 @@ def _ttl(opA, vA, opB, vB):
     return f"""\
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
-@prefix drk:  <http://w3id.org/drk/ontology/> .
+@prefix drk:  <https://w3id.org/drk/ontology/> .
 drk:policyA a odrl:Set ;
   odrl:permission [ odrl:action odrl:use ;
     odrl:constraint [ odrl:leftOperand odrl:meteredTime ;

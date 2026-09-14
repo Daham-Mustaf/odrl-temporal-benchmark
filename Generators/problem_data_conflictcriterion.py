@@ -54,7 +54,7 @@ def _ttl(i1, i2):
                 f"      )\n    ]\n  ] .")
     return ("@prefix odrl: <http://www.w3.org/ns/odrl/2/> .\n"
             "@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .\n"
-            "@prefix drk:  <http://w3id.org/drk/ontology/> .\n"
+            "@prefix drk:  <https://w3id.org/drk/ontology/> .\n"
             + pol("policyA", i1) + "\n" + pol("policyB", i2))
 
 def _P(pid, name, verdict, descr, i1, i2):

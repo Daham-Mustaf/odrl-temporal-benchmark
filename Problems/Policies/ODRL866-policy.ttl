@@ -1,6 +1,6 @@
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
-@prefix drk:  <http://w3id.org/drk/ontology/> .
+@prefix drk:  <https://w3id.org/drk/ontology/> .
 # single policy: one party's own dateTime window
 drk:policy a odrl:Set ;
   odrl:permission [

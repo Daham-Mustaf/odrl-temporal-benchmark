@@ -24,7 +24,7 @@ def _ttl(policies, note):
             inner = "".join(f'\n      [ odrl:leftOperand odrl:{OPER[n]} ; odrl:operator odrl:{op} ; odrl:rightOperand "P{v}D"^^xsd:duration ]' for n, op, v in cons)
             c = f"    odrl:constraint [\n      odrl:and ({inner}\n      )\n    ]"
         B.append(f"drk:{pn} a odrl:Set ;\n  odrl:permission [ odrl:action odrl:use ;\n{c} ] .")
-    return ("@prefix odrl: <http://www.w3.org/ns/odrl/2/> .\n@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .\n@prefix drk:  <http://w3id.org/drk/ontology/> .\n" + f"# Ground execution: {note}\n" + "\n".join(B))
+    return ("@prefix odrl: <http://www.w3.org/ns/odrl/2/> .\n@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .\n@prefix drk:  <https://w3id.org/drk/ontology/> .\n" + f"# Ground execution: {note}\n" + "\n".join(B))
 
 def P(pid, name, verdict, descr, note, ctx, ops, bounds, policies):
     comp = {o: COMPF[o](ctx) for o in ops}

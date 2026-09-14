@@ -27,7 +27,7 @@ def _ttl(pA, anchorA_iso, pB, anchorB_iso):
     return f"""\
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
-@prefix drk:  <http://w3id.org/drk/ontology/> .
+@prefix drk:  <https://w3id.org/drk/ontology/> .
 drk:policyA a odrl:Set ;
   odrl:permission [
     odrl:action odrl:use ;
@@ -120,14 +120,14 @@ PROBLEMS = [
         "lem:windowed-rec handles. Each policy alone is realizable (offer 2026-01-01, request 2026-01-31)."),
        '''@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
         @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
-        @prefix drk:  <http://w3id.org/drk/ontology/> .
+        @prefix drk:  <https://w3id.org/drk/ontology/> .
         drk:policyA a odrl:Set ;
           odrl:permission [
             odrl:action odrl:use ;
             odrl:constraint [
               odrl:and (
-                [ odrl:leftOperand odrl:dateTime ; odrl:operator odrl:gteq ; odrl:rightOperand "2026-01-01"^^xsd:date ]
-                [ odrl:leftOperand odrl:dateTime ; odrl:operator odrl:lteq ; odrl:rightOperand "2026-01-06"^^xsd:date ]
+                [ odrl:leftOperand odrl:dateTime ; odrl:operator odrl:gteq ; odrl:rightOperand "2026-01-01T00:00:00"^^xsd:dateTime ]
+                [ odrl:leftOperand odrl:dateTime ; odrl:operator odrl:lteq ; odrl:rightOperand "2026-01-06T00:00:00"^^xsd:dateTime ]
                 [ odrl:leftOperand odrl:timeInterval ; odrl:operator odrl:eq ; odrl:rightOperand "P30D"^^xsd:duration ; drk:anchor "2026-01-01"^^xsd:date ]
               ) ]
           ] .
@@ -136,8 +136,8 @@ PROBLEMS = [
             odrl:action odrl:use ;
             odrl:constraint [
               odrl:and (
-                [ odrl:leftOperand odrl:dateTime ; odrl:operator odrl:gteq ; odrl:rightOperand "2026-01-04"^^xsd:date ]
-                [ odrl:leftOperand odrl:dateTime ; odrl:operator odrl:lteq ; odrl:rightOperand "2026-02-04"^^xsd:date ]
+                [ odrl:leftOperand odrl:dateTime ; odrl:operator odrl:gteq ; odrl:rightOperand "2026-01-04T00:00:00"^^xsd:dateTime ]
+                [ odrl:leftOperand odrl:dateTime ; odrl:operator odrl:lteq ; odrl:rightOperand "2026-02-04T00:00:00"^^xsd:dateTime ]
                 [ odrl:leftOperand odrl:timeInterval ; odrl:operator odrl:eq ; odrl:rightOperand "P30D"^^xsd:duration ; drk:anchor "2026-01-01"^^xsd:date ]
               ) ]
           ] .''',
