@@ -40,14 +40,17 @@ def _P(pid, subdir, name, verdict, descr, vs, expected, ttl):
     }
 
 PFX = "@prefix odrl: <http://www.w3.org/ns/odrl/2/> .\n@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .\n@prefix drk:  <https://w3id.org/drk/ontology/> .\n"
-def _atom(op, lo, val):
+def _atom(op, lo, val, anchor=None):
     dt = "xsd:dateTime" if lo == "dateTime" else "xsd:duration"
-    return f'        [ odrl:leftOperand odrl:{lo} ; odrl:operator odrl:{op} ; odrl:rightOperand "{val}"^^{dt} ]\n'
-def pol(name, atoms):  # atoms = list of (op, operand, value); >=2 -> odrl:and
+    anchor_clause = f' ; drk:anchor "{anchor}"^^xsd:date' if anchor else ""
+    return f'        [ odrl:leftOperand odrl:{lo} ; odrl:operator odrl:{op} ; odrl:rightOperand "{val}"^^{dt}{anchor_clause} ]\n'
+def pol(name, atoms):  # atoms = list of (op, operand, value[, anchor]); >=2 -> odrl:and
     if len(atoms) == 1:
-        op, lo, val = atoms[0]
+        op, lo, val, *rest = atoms[0]
+        anchor = rest[0] if rest else None
         dt = "xsd:dateTime" if lo == "dateTime" else "xsd:duration"
-        body = f'    odrl:constraint [ odrl:leftOperand odrl:{lo} ; odrl:operator odrl:{op} ; odrl:rightOperand "{val}"^^{dt} ]'
+        anchor_clause = f' ; drk:anchor "{anchor}"^^xsd:date' if anchor else ""
+        body = f'    odrl:constraint [ odrl:leftOperand odrl:{lo} ; odrl:operator odrl:{op} ; odrl:rightOperand "{val}"^^{dt}{anchor_clause} ]'
     else:
         body = "    odrl:constraint [\n      odrl:and (\n" + "".join(_atom(*a) for a in atoms) + "      )\n    ]"
     return f"drk:{name} a odrl:Set ;\n  odrl:permission [\n    odrl:action odrl:use ;\n{body}\n  ] .\n"
@@ -84,8 +87,8 @@ PROBLEMS = [
         "elapsedTime overlap [0,P10D], delayPeriod silent in the request (unknown), timeInterval disjoint cycles\n"
         "(gcd(30,45)=15 does not divide the 516-day offset). The and-fold over the four is Conflict."),
        ["conflict", "compatible", "unknown", "conflict"], "conflict",
-       pair([("lt","dateTime","2026-12-31T00:00:00"),("lteq","elapsedTime","P30D"),("gteq","delayPeriod","P1D"),("eq","timeInterval","P30D")],
-            [("eq","dateTime","2027-06-01T00:00:00"),("lteq","elapsedTime","P10D"),("eq","timeInterval","P45D")],
+       pair([("lt","dateTime","2026-12-31T00:00:00"),("lteq","elapsedTime","P30D"),("gteq","delayPeriod","P1D"),("eq","timeInterval","P30D","2026-01-01")],
+            [("eq","dateTime","2027-06-01T00:00:00"),("lteq","elapsedTime","P10D"),("eq","timeInterval","P45D","2027-06-01")],
             "# BSB offer (anchored 2026-01-01)", "# BnF request (anchored 2027-06-01)")),
     _P("ODRL864", "Capstone", "BSB-BnF structure with conflicts resolved -> Unknown", "Unknown",
        ("Same four-operand structure with the two conflicts removed: dateTime aligned (both eq 2026-06-01),\n"
@@ -93,7 +96,7 @@ PROBLEMS = [
         "the request. The vector is [compatible, compatible, unknown, compatible], so the and-fold is Unknown\n"
         "-- a single silent operand keeps the whole policy pair underdetermined."),
        ["compatible", "compatible", "unknown", "compatible"], "unknown",
-       pair([("eq","dateTime",D),("lteq","elapsedTime","P30D"),("gteq","delayPeriod","P1D"),("eq","timeInterval","P30D")],
-            [("eq","dateTime",D),("lteq","elapsedTime","P10D"),("eq","timeInterval","P30D")],
+       pair([("eq","dateTime",D),("lteq","elapsedTime","P30D"),("gteq","delayPeriod","P1D"),("eq","timeInterval","P30D","2026-06-01")],
+            [("eq","dateTime",D),("lteq","elapsedTime","P10D"),("eq","timeInterval","P30D","2026-06-01")],
             "# offer (anchored 2026-06-01)", "# request (anchored 2026-06-01)")),
 ]
