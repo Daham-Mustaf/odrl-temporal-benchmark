@@ -81,6 +81,21 @@ uv run check_benchmark.py Problems --timeout 20
 uv run check_benchmark.py Problems --timeout 20 --csv results.csv
 ```
 
+Validate the Turtle policies against the benchmark's SHACL profile:
+
+```bash
+uv run validate_policies.py
+```
+
+The SHACL pass checks RDF structure, the supported temporal operands and operators,
+logical constraint lists, and the operand-specific right-operand datatypes. It does
+not recompute or prove the temporal conflict verdicts. Validation also loads
+[`ontology/drk-temporal-extension.ttl`](ontology/drk-temporal-extension.ttl), which
+provisionally defines `https://w3id.org/drk/ontology/anchor` while the term is being
+evaluated for inclusion in the DRK ontology. The term is experimental, not part of
+the currently published DRK ontology. If it is adopted upstream under the same IRI,
+the local declaration can be removed without migrating the policy data.
+
 Vampire and E are run over the `.p` files, Z3 and cvc5 over the `.smt2` files. Each
 reasoner's reported status is checked against the expected status stored in the problem.
 `check_benchmark.py` also verifies the structure (72 problems, 15 categories, every
